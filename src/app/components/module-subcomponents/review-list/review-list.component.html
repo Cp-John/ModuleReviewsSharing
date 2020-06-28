@@ -1,0 +1,127 @@
+<div class="subheader">
+    <div class="mat-body">
+        number of reviews: {{reviewList.length}}
+    </div>
+    <div class="add-reviews-btn">
+        <button mat-icon-button (click)="addReviews()" matTooltip="add reviews">
+            <mat-icon>add_circle</mat-icon>
+        </button>
+    </div>
+</div>
+<mat-card class="no-reviews-yet mat-h1" *ngIf="reviewList.length==0">
+    <mat-card-content>
+        <span class="mat-h3">No reviews yet!</span>
+        <mat-icon class="no-reviews-icon">sentiment_very_dissatisfied</mat-icon>
+    </mat-card-content>
+</mat-card>
+<mat-card *ngFor="let review of reviewListShown" class="review-container">
+    <mat-card-header>
+        <div mat-card-avatar class="header-image"></div>
+        <mat-card-title>
+            <span class="user-name">
+                {{userName}}
+                <span class="mat-caption">Under Prof {{review.prof}}, {{review.acadYear}}</span>
+            </span>
+        </mat-card-title>
+        <mat-card-subtitle>
+            {{review.date}} - {{review.time}}
+        </mat-card-subtitle>
+    </mat-card-header>
+
+    <mat-divider></mat-divider>
+
+    <mat-card-content>
+        <div class="review">
+            {{review.reviewAndRatings.review}}
+        </div>
+        <div class="extra-info mat-caption">
+            Expected Grade: {{review.extraInfo.gradeExpected}}
+        </div>
+
+        <div class="extra-info mat-caption">
+            Grade Obtained: {{review.extraInfo.gradeObtained}}
+        </div>
+
+    </mat-card-content>
+    <mat-divider></mat-divider>
+
+    <mat-card-actions>
+        <div class="flex-container ratings">
+            <div matTooltip="10 for most satisfied">
+                general: {{review.reviewAndRatings.general}} / 10
+                <div class="icon">
+                    <mat-icon *ngIf="review.reviewAndRatings.general<3">sentiment_very_dissatisfied
+                    </mat-icon>
+                    <mat-icon *ngIf="review.reviewAndRatings.general>2&&review.reviewAndRatings.general<5">
+                        sentiment_dissatisfied</mat-icon>
+                    <mat-icon *ngIf="review.reviewAndRatings.general>4&&review.reviewAndRatings.general<7">
+                        sentiment_satisfied</mat-icon>
+                    <mat-icon *ngIf="review.reviewAndRatings.general>6&&review.reviewAndRatings.general<9">
+                        sentiment_satisfied_alt</mat-icon>
+                    <mat-icon *ngIf="review.reviewAndRatings.general>8">sentiment_very_satisfied</mat-icon>
+                </div>
+            </div>
+            <div matTooltip="10 for most difficult">
+                difficulty: {{review.reviewAndRatings.difficulty}} / 10
+                <div class="icon">
+                    <mat-icon *ngIf="review.reviewAndRatings.difficulty>8">sentiment_very_dissatisfied
+                    </mat-icon>
+                    <mat-icon *ngIf="review.reviewAndRatings.difficulty>6&&review.reviewAndRatings.difficulty<9">
+                        sentiment_dissatisfied</mat-icon>
+                    <mat-icon *ngIf="review.reviewAndRatings.difficulty>4&&review.reviewAndRatings.difficulty<7">
+                        sentiment_satisfied</mat-icon>
+                    <mat-icon *ngIf="review.reviewAndRatings.difficulty>2&&review.reviewAndRatings.difficulty<5">
+                        sentiment_satisfied_alt</mat-icon>
+                    <mat-icon *ngIf="review.reviewAndRatings.difficulty<3">sentiment_very_satisfied
+                    </mat-icon>
+                </div>
+            </div>
+            <div matTooltip="10 for heaviest workload">
+                workload: {{review.reviewAndRatings.workload}} / 10
+                <div class="icon">
+                    <mat-icon *ngIf="review.reviewAndRatings.workload>8">sentiment_very_dissatisfied
+                    </mat-icon>
+                    <mat-icon *ngIf="review.reviewAndRatings.workload>6&&review.reviewAndRatings.workload<9">
+                        sentiment_dissatisfied</mat-icon>
+                    <mat-icon *ngIf="review.reviewAndRatings.workload>4&&review.reviewAndRatings.workload<7">
+                        sentiment_satisfied</mat-icon>
+                    <mat-icon *ngIf="review.reviewAndRatings.workload>2&&review.reviewAndRatings.workload<5">
+                        sentiment_satisfied_alt</mat-icon>
+                    <mat-icon *ngIf="review.reviewAndRatings.workload<3">sentiment_very_satisfied</mat-icon>
+                </div>
+            </div>
+            <div matTooltip="10 for most willing to recommend">
+                recommend: {{review.reviewAndRatings.recommend}} / 10
+                <div class="icon">
+                    <mat-icon *ngIf="review.reviewAndRatings.recommend<3">sentiment_very_dissatisfied
+                    </mat-icon>
+                    <mat-icon *ngIf="review.reviewAndRatings.recommend>2&&review.reviewAndRatings.recommend<5">
+                        sentiment_dissatisfied</mat-icon>
+                    <mat-icon *ngIf="review.reviewAndRatings.recommend>4&&review.reviewAndRatings.recommend<7">
+                        sentiment_satisfied</mat-icon>
+                    <mat-icon *ngIf="review.reviewAndRatings.recommend>6&&review.reviewAndRatings.recommend<9">
+                        sentiment_satisfied_alt</mat-icon>
+                    <mat-icon *ngIf="review.reviewAndRatings.recommend>8">sentiment_very_satisfied
+                    </mat-icon>
+                </div>
+            </div>
+        </div>
+        <div class="btns">
+            <button mat-icon-button matTooltip="like" (click)="onClickLikePost(review.id)">
+                <mat-icon [ngClass]="{'pink-color': ifLike(review.id)}">thumb_up</mat-icon>
+                {{review.numOfLikes}}
+            </button>
+            <button mat-icon-button matTooltip="dislike" (click)="onClickDislikePost(review.id)">
+                <mat-icon [ngClass]="{'pink-color': ifDislike(review.id)}">thumb_down</mat-icon>
+                {{review.numOfDislikes}}
+            </button>
+            <button mat-icon-button matTooltip="share" (click)="onClickSharePost(review.id)">
+                <mat-icon>share</mat-icon>
+                {{review.numOfShares}}
+            </button>
+        </div>
+    </mat-card-actions>
+
+</mat-card>
+<mat-paginator [length]="reviewList.length" pageSize="5" showFirstLastButtons="true" hidePageSize="true"
+    (page)="updateReviewListShown($event)"></mat-paginator>

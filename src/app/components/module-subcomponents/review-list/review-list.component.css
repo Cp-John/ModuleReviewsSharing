@@ -1,0 +1,61 @@
+.no-reviews-yet {
+    text-align: center;
+}
+
+.no-reviews-icon {
+    margin: 10px;
+}
+
+.subheader > div {
+    display: inline-block;
+    width: 50%;
+}
+
+.add-reviews-btn {
+    text-align: right;
+}
+
+.review {
+    margin: 10px;
+    padding-top: 10px;
+}
+
+.flex-container {
+    display: flex;
+}
+
+.ratings > div {
+    width: 25%;
+    text-align: center;
+}
+
+mat-card-actions {
+    display: flex;
+}
+
+.btns {
+    width: 30%;
+    text-align: right;
+}
+
+.btns > button {
+    margin: 10px 10px 0;
+}
+
+.ratings {
+    width: 70%;
+    margin-top: 10px;
+}
+
+.header-image {
+    background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+    background-size: cover;
+  }
+  
+.review-container {
+    margin: 10px auto;
+}
+
+.pink-color {
+    color: pink;
+}

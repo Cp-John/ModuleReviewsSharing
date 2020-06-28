@@ -1,0 +1,65 @@
+.no-questions-yet {
+    text-align: center;
+}
+
+.no-questions-icon, .no-answers-icon {
+    margin: 10px;
+}
+
+.subheader > div {
+    display: inline-block;
+    width: 50%;
+}
+
+.add-questions-btn {
+    text-align: right;
+}
+
+.flex-container {
+    display: flex;
+}
+
+.answer-container {
+    border-top: 1px whitesmoke solid;
+    padding: 10px;
+}
+
+mat-card-actions {
+    text-align: right;
+}
+
+mat-card {
+    margin-bottom: 10px;
+}
+
+.form-actions {
+    text-align: right;
+}
+
+.form-actions > button {
+    margin: 5px 10px;
+}
+
+.form {
+    width: 100%;
+    margin: 10px 0;
+    border: 1px grey solid;
+    background-color: whitesmoke;
+    border-radius: 5px;
+    text-align: center;
+    padding: 10px;
+}
+
+mat-form-field {
+    width: 90%;
+    margin: 0 auto;
+    text-align: left;
+}
+
+mat-card-subtitle {
+    padding-left: 30px;
+}
+
+.answer-caption {
+    text-align: right;
+}

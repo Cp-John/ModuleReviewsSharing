@@ -1,0 +1,51 @@
+<div>
+    <div class="mat-h1">Review and Ratings:</div>
+    <div class="slider-box">
+        <div class="mat-body-1">general: {{reviewAndRatings.general}} / 10 <span class="mat-caption">(10 for most satisfied)</span></div>
+        <mat-slider max=10 min=1 thumbLabel=true step=1 [(ngModel)]="reviewAndRatings.general">
+        </mat-slider>
+        <mat-icon *ngIf="reviewAndRatings.general<3">sentiment_very_dissatisfied</mat-icon>
+        <mat-icon *ngIf="reviewAndRatings.general==3||reviewAndRatings.general==4">sentiment_dissatisfied</mat-icon>
+        <mat-icon *ngIf="reviewAndRatings.general==5||reviewAndRatings.general==6">sentiment_satisfied</mat-icon>
+        <mat-icon *ngIf="reviewAndRatings.general==7||reviewAndRatings.general==8">sentiment_satisfied_alt</mat-icon>
+        <mat-icon *ngIf="reviewAndRatings.general>8">sentiment_very_satisfied</mat-icon>
+    </div>
+
+    <div class="slider-box">
+        <div class="mat-body-1">difficulty: {{reviewAndRatings.difficulty}} / 10 <span class="mat-caption">(10 for most difficult)</span></div>
+        <mat-slider max=10 min=1 thumbLabel=true step=1 [(ngModel)]="reviewAndRatings.difficulty">
+        </mat-slider>
+        <mat-icon *ngIf="reviewAndRatings.difficulty>8">sentiment_very_dissatisfied</mat-icon>
+        <mat-icon *ngIf="reviewAndRatings.difficulty==7||reviewAndRatings.difficulty==8">sentiment_dissatisfied</mat-icon>
+        <mat-icon *ngIf="reviewAndRatings.difficulty==5||reviewAndRatings.difficulty==6">sentiment_satisfied</mat-icon>
+        <mat-icon *ngIf="reviewAndRatings.difficulty==3||reviewAndRatings.difficulty==4">sentiment_satisfied_alt</mat-icon>
+        <mat-icon *ngIf="reviewAndRatings.difficulty<3">sentiment_very_satisfied</mat-icon>
+    </div>
+
+    <div class="slider-box">
+        <div class="mat-body-1">workload: {{reviewAndRatings.workload}} / 10 <span class="mat-caption">(10 for heaviest workload)</span></div>
+        <mat-slider max=10 min=1 thumbLabel=true step=1 [(ngModel)]="reviewAndRatings.workload">
+        </mat-slider>
+        <mat-icon *ngIf="reviewAndRatings.workload>8">sentiment_very_dissatisfied</mat-icon>
+        <mat-icon *ngIf="reviewAndRatings.workload==7||reviewAndRatings.workload==8">sentiment_dissatisfied</mat-icon>
+        <mat-icon *ngIf="reviewAndRatings.workload==5||reviewAndRatings.workload==6">sentiment_satisfied</mat-icon>
+        <mat-icon *ngIf="reviewAndRatings.workload==3||reviewAndRatings.workload==4">sentiment_satisfied_alt</mat-icon>
+        <mat-icon *ngIf="reviewAndRatings.workload<3">sentiment_very_satisfied</mat-icon>
+    </div>
+
+    <div class="slider-box">
+        <div class="mat-body-1">recommend: {{reviewAndRatings.recommend}} / 10 <span class="mat-caption">(10 for most willing to recommend)</span></div>
+        <mat-slider max=10 min=1 thumbLabel=true step=1 [(ngModel)]="reviewAndRatings.recommend">
+        </mat-slider>
+        <mat-icon *ngIf="reviewAndRatings.recommend<3">sentiment_very_dissatisfied</mat-icon>
+        <mat-icon *ngIf="reviewAndRatings.recommend==3||reviewAndRatings.recommend==4">sentiment_dissatisfied</mat-icon>
+        <mat-icon *ngIf="reviewAndRatings.recommend==5||reviewAndRatings.recommend==6">sentiment_satisfied</mat-icon>
+        <mat-icon *ngIf="reviewAndRatings.recommend==7||reviewAndRatings.recommend==8">sentiment_satisfied_alt</mat-icon>
+        <mat-icon *ngIf="reviewAndRatings.recommend>8">sentiment_very_satisfied</mat-icon>
+    </div>
+
+    <mat-form-field class="review" appearance="fill">
+        <mat-label>Review</mat-label>
+        <textarea name="review" cols="30" rows="10" placeholder="Any other things you want to share about this module" [(ngModel)]="reviewAndRatings.review" matInput></textarea>
+    </mat-form-field>
+</div>

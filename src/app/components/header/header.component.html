@@ -1,0 +1,25 @@
+<mat-toolbar color="primary">
+    <div class="nusmods">
+        <button mat-button>
+            <span class="mat-h1" (click)="goHome()">NUSMods</span>
+        </button>
+    </div>
+
+    <div class="btns">
+        <button mat-button>
+            <span class="mat-h3" (click)="goModuleList()">Module List</span>
+        </button>
+
+        <button mat-button>
+            <span class="mat-h3" (click)="goPostReviews()">Post Reviews</span>
+        </button>
+
+        <button mat-button>
+            <span class="mat-h3" (click)="goLatestPosts()">Latest Posts</span>
+        </button>
+    </div>
+
+    <div class="my-modules">
+        <button mat-raised-button (click)="goMyModules()">My Modules</button>
+    </div>
+</mat-toolbar>

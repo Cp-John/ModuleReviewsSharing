@@ -1,0 +1,40 @@
+.selector-container {
+    margin: 1rem 0;
+}
+
+.flex-container {
+    display: flex;
+}
+
+.more-btn {
+    text-align: right;
+    margin: 5px;
+}
+
+.mat-h1 {
+    margin: 10px;
+}
+
+.mat-h3 {
+    margin: 10px;
+}
+
+button {
+    margin: 5px;
+}
+
+button:hover {
+    text-decoration: underline;
+    color: #4050b5;
+}
+
+.btn-container {
+    height: 100%;
+    width: 164px;
+}
+
+.back-btn{
+    position: absolute;
+    height: 725px;
+    margin-top: 0;
+}

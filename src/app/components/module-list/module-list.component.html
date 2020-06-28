@@ -1,0 +1,14 @@
+<mat-drawer-container [hasBackdrop]="hasBackdrop">
+    <mat-drawer #drawer mode="push" [style.width]="widthOfDrawer" (openedChange)="updateOpened()">
+        <app-refinement-table #RefinementTable (sendMore)="updateMore($event)" (sendCloseDrawer)="drawer.toggle()">
+        </app-refinement-table>
+    </mat-drawer>
+    <main [style.width]="widthOfMain">
+        <button mat-button class="forward-btn" (click)="drawer.toggle()" *ngIf="!drawer.opened">
+            <mat-icon>arrow_forward_ios</mat-icon>
+        </button>
+        <div>
+            <app-main-board [searchInput]="searchInput"></app-main-board>
+        </div>
+    </main>
+</mat-drawer-container>

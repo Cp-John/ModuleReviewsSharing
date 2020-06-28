@@ -1,0 +1,36 @@
+.module-code {
+    width: 100%;
+}
+
+.prof {
+    width: 40%;
+}
+
+.mat-h1 {
+    margin-bottom: 1rem;
+}
+
+mat-form-field {
+    margin: 10px;
+}
+
+.module-info > div {
+    display: inline-block;
+}
+
+.module-info > .mat-h4 {
+    width: 60%;
+}
+
+.module-info > .mat-caption {
+    width: 40%;
+    text-align: right;
+}
+
+mat-option:hover {
+    color: #4050b5;
+}
+
+.more-btn {
+    width: 100%;
+}

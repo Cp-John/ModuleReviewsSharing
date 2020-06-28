@@ -1,0 +1,16 @@
+.mat-h1 {
+    margin-top: 1.5rem;
+}
+
+mat-slider {
+    width: 60%;
+}
+
+.review {
+    width: 60%;
+    margin: 10px;
+}
+
+.slider-box {
+    margin: 10px;
+}

@@ -1,0 +1,71 @@
+main {
+    width: 80%;
+    display: flex;
+    margin: 2rem auto;
+}
+
+.left-panel {
+    width: 70%;
+}
+
+.mat-display-1 {
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.right-panel {
+    margin-left: 5%;
+    width: 25%;
+}
+
+.flex-container {
+    display: flex;
+}
+
+.navigation-btn {
+    width: 33.3%;
+    border-radius: 0;
+    background-color: whitesmoke;
+}
+
+.navigation-btn:hover {
+    color: #4050b5;
+}
+
+.active-btn, .active-btn:hover {
+    background-color: #4050b5;
+    color: white;
+}
+
+.average-rating {
+    width: 50%;
+    margin: 10px 5px;
+}
+
+.right-panel > mat-card {
+    width: 100%;
+    margin: 10px auto;
+}
+
+.more-module-option {
+    height: 45px;
+    padding: 0;
+}
+
+.more-module-option:hover {
+    text-decoration: underline;
+    color: #4050b5;
+}
+
+.more-module-list-container {
+    padding-top: 10px;
+}
+
+.module-title {
+    height: 15px;
+    font-size: 14px;
+}
+
+.module-info {
+    font-size: 10px;
+}

@@ -1,0 +1,74 @@
+* {
+    text-align: center;
+}
+
+.headline {
+    margin: 6rem 0 1rem;
+}
+
+.search-box {
+    margin-top: 3rem;
+    position: relative;
+    right: 11px;
+    top: 18px;
+}
+
+mat-form-field {
+    width: 55%;
+    text-align: left;
+    margin: 10px;
+    margin-bottom: 0;
+}
+
+input {
+    text-align: left;
+}
+
+.scrollable-container {
+    width: 55%;
+    height: 200px;
+    overflow: auto;
+    border: 1px solid #ccc;
+    border-top: none;
+    margin: 0 auto;
+}
+
+mat-option:hover {
+    color: #4050b5;
+}
+
+.module-info {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    padding-top: 20px;
+}
+
+.module-info > .mat-caption {
+    text-align: right;
+    width: 40%;
+}
+
+.module-info > .mat-h4 {
+    text-align: left;
+    width: 60%;
+}
+
+.flex-container {
+    display: flex;
+    width: 50%;
+    margin: 5rem auto;
+}
+
+.flex-container > button {
+    width: 33.3%;
+    border-radius: 0;
+}
+
+.colored-btn {
+    background-color: whitesmoke;
+}
+
+.more-btn {
+    width: 100%;
+}

@@ -1,0 +1,12 @@
+<div class="refinement-list" *ngIf="!refinementList.isEmpty()">
+    <div *ngFor="let selector of selectorList" class="refinement-container">
+        <span *ngIf="refinementList[selector].length>0">
+            <span class="mat-h3">{{selector}}: </span>
+            <button mat-button (click)="deleteRefinement(selector, refinement)"
+                *ngFor="let refinement of refinementList[selector]">
+                {{refinement}}
+                <mat-icon>cancel</mat-icon>
+            </button>
+        </span>
+    </div>
+</div>

@@ -1,0 +1,16 @@
+mat-drawer-container {
+    width: 100%;
+}
+
+main {
+    height: 100%;
+    display: flex;
+}
+
+.forward-btn {
+    height: 725px;
+}
+
+main > div {
+    width: 100%;
+}

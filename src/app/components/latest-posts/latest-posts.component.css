@@ -1,0 +1,69 @@
+main {
+    width: 80%;
+    margin: 2rem auto;
+}
+
+.left-panel {
+    width: 70%;
+}
+
+.mat-display-1 {
+    margin-bottom: 1rem;
+}
+
+.right-panel {
+    margin-left: 5%;
+    width: 25%;
+}
+
+.review {
+    margin: 10px;
+    padding-top: 15px;
+}
+
+.no-reviews-yet {
+    text-align: center;
+}
+
+.no-reviews-yet > mat-icon {
+    margin: 0 10px;
+}
+
+.left-panel > mat-card {
+    margin: 10px;
+}
+
+.header {
+    width: 95%;
+}
+
+.view-btn {
+    width: 5%;
+    text-align: right;
+}
+
+.flex-container {
+    display: flex;
+}
+
+.ratings {
+    width: 70%;
+}
+
+.ratings > div {
+    width: 25%;
+    text-align: center;
+}
+
+.btns {
+    width: 30%;
+    text-align: right;
+}
+
+.btns > button {
+    margin: 0 10px;
+}
+
+.pink-color {
+    color: pink;
+}

@@ -1,0 +1,37 @@
+<div class="flex-container">
+    <div>
+        <div class="selector-container" *ngFor="let selector of selectorList; let key=index">
+            <span class="mat-h1">{{selector}}</span>
+            <div *ngIf="!more[selector]">
+                <button mat-button (click)="addRefinement(selector, condition)" *ngFor="let condition of conditionList[selector]">
+                    {{condition}}
+                </button>
+            </div>
+            <div *ngIf="more[selector]">
+                <div *ngFor="let initial of initialList">
+                    <span *ngIf="fullList[selector][initial]">
+                        <div class="mat-h3"> {{initial}} </div>
+                        <div>
+                            <button (click)="addRefinement(selector, refinement)" *ngFor="let refinement of fullList[selector][initial]"
+                                mat-button>
+                                {{refinement}}
+                            </button>
+                        </div>
+                    </span>
+                </div>
+            </div>
+            <div class="more-btn" *ngIf="selector=='Faculty' || selector=='Department'">
+                <button mat-button color="primary" *ngIf="!more[selector]" (click)="showMore(selector)">
+                    More</button>
+                <button mat-button color="primary" *ngIf="more[selector]" (click)="showLess(selector)">Less</button>
+            </div>
+
+            <mat-divider *ngIf="key!=selectorList.length - 1"></mat-divider>
+        </div>
+    </div>
+    <div class="btn-container">
+        <button mat-button class="back-btn" (click)="closeDrawer()">
+            <mat-icon>arrow_back_ios</mat-icon>
+        </button>
+    </div>
+</div>

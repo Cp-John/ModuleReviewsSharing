@@ -1,0 +1,30 @@
+<div>
+    <div class="headline mat-display-3">NUSMods</div>
+    <div class="mat-caption">reviews | ratings | recommend</div>
+    <div class="search-box">
+        <mat-icon>search</mat-icon>
+        <mat-form-field>
+            <input 
+                type="text" 
+                autocomplete="off"
+                matInput 
+                placeholder="Module code or title" 
+                (input)="search(); inputStatusOn()"
+                [(ngModel)]="searchInput">
+        </mat-form-field>
+    </div>
+    <div class="scrollable-container" cdkScrollable *ngIf="inputStatus">
+        <mat-option *ngFor="let module of moduleListShown" (click)="select(module)">
+            <div class="module-info">
+                <div class="mat-h4">{{module.moduleCode}} - {{module.title}} </div>
+                <div class="mat-caption"> {{module.faculty}} - {{module.department}} - {{module.moduleCredit}}MCs </div>
+            </div>
+        </mat-option>
+        <button class="more-btn" mat-button color="primary" (click)="goModuleList()">More</button>
+    </div>
+    <div class="flex-container">
+        <button mat-button (click)="goModuleListWithNoInput()" class="colored-btn">Module List</button>
+        <button mat-raised-button (click)="goPostReviews()" color="primary">Post Reviews</button>
+        <button mat-button (click)="goLatestPosts()" class="colored-btn">Latest Posts</button>
+    </div>
+</div>

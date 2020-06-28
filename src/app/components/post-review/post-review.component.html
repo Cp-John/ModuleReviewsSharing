@@ -1,0 +1,14 @@
+<main>
+    <mat-card class="left-panel">
+        <app-module-info #ModuleInfo [moduleCode]="moduleCode"></app-module-info>
+        <mat-divider></mat-divider>
+        <app-review-and-ratings #ReviewAndRatings></app-review-and-ratings>
+        <mat-divider></mat-divider>
+        <app-extra-info #ExtraInfo></app-extra-info>
+        <button mat-raised-button color="primary" type="submit" (click)="onSubmit()">submit</button>
+    </mat-card>
+    
+    <div class="right-panel">
+        <app-data-collected></app-data-collected>
+    </div>
+</main>

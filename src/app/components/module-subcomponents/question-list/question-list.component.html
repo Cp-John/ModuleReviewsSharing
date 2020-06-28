@@ -1,0 +1,83 @@
+<div class="subheader">
+    <div class="mat-body">
+        number of questions: {{questionList.length}}
+    </div>
+    <div class="add-questions-btn">
+        <button mat-icon-button (click)="showQuestionForm()" matTooltip="ask a question">
+            <mat-icon>add_circle</mat-icon>
+        </button>
+    </div>
+</div>
+
+<div class="form" *ngIf="ifAskAQuestion">
+    <mat-form-field appearance="outline">
+        <mat-label>Clearly state your question and keep it short.</mat-label>
+        <input type="text" matInput [(ngModel)]="questionEntered" name="questionEntered" minlength="3" required>
+    </mat-form-field>
+    <div class="form-actions">
+        <button mat-raised-button (click)="resetQuestionForm()" color="warn">cancel</button>
+        <button mat-raised-button (click)="onSubmitAQuestion(); paginator.firstPage()" color="primary">submit</button>
+    </div>
+</div>
+
+<mat-card class="no-questions-yet mat-h1" *ngIf="questionList.length==0">
+    <mat-card-content>
+        <span class="mat-h3">No questions yet!</span>
+        <mat-icon class="no-questions-icon">sentiment_very_dissatisfied</mat-icon>
+    </mat-card-content>
+</mat-card>
+
+<mat-card class="question-container" *ngFor="let question of questionListShown; let key=index">
+    <mat-card-title>
+        <mat-icon>question_answer</mat-icon>
+        {{question.content}}
+    </mat-card-title>
+
+    <mat-card-subtitle>
+        {{question.date}} - {{question.time}} by {{userName}}
+    </mat-card-subtitle>
+
+    <mat-card-content>
+        <div class="no-answers-yet mat-h1" *ngIf="question.answerList.length==0">
+            <mat-card-content>
+                <span class="mat-h3">No answers yet!</span>
+                <mat-icon class="no-answers-icon">sentiment_very_dissatisfied</mat-icon>
+            </mat-card-content>
+        </div>
+
+        <ol>
+            <li class="answer-container" *ngFor="let answer of question.answerList">
+                {{answer.content}}
+                <div class="answer-caption mat-caption">
+                    {{answer.date}} - {{answer.time}} by {{userName}}
+                </div>
+            </li>
+        </ol>
+
+        <div class="form" *ngIf="ifPostAnAnswer[key]">
+            <mat-form-field appearance="outline">
+                <mat-label>Clearly state your answer.</mat-label>
+                <input type="text" 
+                    matInput 
+                    [(ngModel)]="answerEntered" 
+                    name="answerEntered" 
+                    minlength="3" 
+                    required>
+            </mat-form-field>
+
+            <div class="form-actions">
+                <button mat-raised-button (click)="resetAnswerForm(key)" color="warn">cancel</button>
+                <button mat-raised-button (click)="onSubmitAnAnswer(question, key)" color="primary">submit</button>
+            </div>
+        </div>
+    </mat-card-content>
+
+    <mat-card-actions *ngIf="!ifPostAnAnswer[key]">
+        <button mat-raised-button color="primary" (click)="showAnswerForm(key)" matTooltip="post an answer">I have an
+            answer!</button>
+    </mat-card-actions>
+
+</mat-card>
+
+<mat-paginator [length]="questionList.length" pageSize="3" showFirstLastButtons="true" hidePageSize="true"
+    (page)="updateQuestionListShown($event)" #paginator></mat-paginator>

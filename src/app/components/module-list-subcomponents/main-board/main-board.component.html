@@ -1,0 +1,95 @@
+<div class="main-board">
+    <app-refinement-list (sendRefinementList)="updateRefinementList($event)"></app-refinement-list>
+    <div class="header">
+        <div class="search-box">
+            <mat-icon>search</mat-icon>
+            <mat-form-field>
+                <mat-label>Module Code or Title</mat-label>
+                <input type="text" class="mat-h3" matInput [(ngModel)]="searchInput" placeholder="CS2100"
+                    (input)="search(); paginator.firstPage()">
+            </mat-form-field>
+        </div>
+
+        <!-- <mat-expansion-panel class="search-among-modules-with-reviews">
+            <mat-expansion-panel-header>
+                <mat-panel-description>
+                    Search with prof and acadYear among modules with reviews.
+                </mat-panel-description>
+            </mat-expansion-panel-header>
+
+            <mat-form-field class="input">
+                <mat-label>Prof</mat-label>
+                <input type="text" name="prof" matInput [(ngModel)]="prof" (input)="search(); paginator.firstPage()">
+            </mat-form-field>
+    
+            <mat-form-field class="input">
+                <mat-label>AcadYear</mat-label>
+                <mat-select name="acadYear" [(ngModel)]="acadYear" (selectionChange)="search(); paginator.firstPage()">
+                    <mat-option value="2019-2020">19 - 20</mat-option>
+                    <mat-option value="2018-2019">18 - 19</mat-option>
+                    <mat-option value="2017-2018">17 - 18</mat-option>
+                    <mat-option value="">All</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </mat-expansion-panel> -->
+
+    </div>
+    <mat-divider></mat-divider>
+
+
+    <div class="search-result">
+        <div class="flex-container">
+            <div class="number-of-modules-found">
+                {{filteredModuleList.length}} Modules Found
+            </div>
+
+            <div class="sort-options">
+                <mat-form-field>
+                    <mat-label>Sort by:</mat-label>
+                    <mat-select [(ngModel)]="sortOption" name="sortOption" (selectionChange)="sortFilteredModuleList()">
+                      <mat-option value="moduleCode">
+                        module code
+                      </mat-option>
+                      <mat-option value="title">
+                        module title
+                      </mat-option>
+                      <mat-option value="moduleCredit">
+                        module credit
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+
+                  <button mat-icon-button (click)="reverseFilteredModuleList()">
+                      <mat-icon matTooltip="reverse">refresh</mat-icon>
+                  </button>
+            </div>
+        </div>
+        <mat-card class="module-list">
+            <div *ngFor="let module of moduleListShown; let key=index" class="flex-container">
+                <button mat-button class="module-btn" (click)="goModule(module.moduleCode)">
+                    <mat-icon>search</mat-icon>
+                    <span>{{module.moduleCode}} - {{module.title}}</span>
+                    <span class="mat-caption">
+                        {{module.faculty}} - {{module.department}} - {{module.moduleCredit}}
+                    </span>
+                </button>
+                <div class="review-action flex-container">
+                    <span class="number-of-reviews">{{module.numOfReviews}}</span>
+                    <button mat-icon-button class="add-btn" (click)="goPostReviews(module.moduleCode)"
+                        matTooltip="add reviews">
+                        <mat-icon>add_circle</mat-icon>
+                    </button>
+                </div>
+            </div>
+            <div *ngIf="moduleListShown.length<15" class="bottom">
+                Already at the bottom!
+            </div>
+        </mat-card>
+        <mat-paginator 
+            [length]="filteredModuleList.length" 
+            pageSize="15" 
+            showFirstLastButtons="true"
+            hidePageSize="true"
+            (page)="updateModuleListShown($event)" #paginator></mat-paginator>
+    </div>
+</div>

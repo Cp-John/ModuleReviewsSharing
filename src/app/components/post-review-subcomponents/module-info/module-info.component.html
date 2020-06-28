@@ -1,0 +1,31 @@
+<div>
+    <div class="mat-h1">Module Info:</div>
+    <mat-form-field class="module-code" appearance="outline">
+        <mat-label>Module Code or Title</mat-label>
+        <input matInput [matAutocomplete]="auto" [(ngModel)]="searchInput" (input)="search()">
+        <mat-autocomplete #auto="matAutocomplete">
+            <mat-option *ngFor="let module of moduleListShown" (click)="select(module)">
+                <div class="module-info">
+                    <div class="mat-h4">{{module.moduleCode}} - {{module.title}} </div>
+                    <div class="mat-caption"> {{module.faculty}} - {{module.department}} - {{module.moduleCredit}}MCs </div>
+                </div>
+            </mat-option>
+            <button mat-button class="more-btn" color="primary" (click)="goModuleList()">More</button>
+        </mat-autocomplete>
+      </mat-form-field>
+
+    <mat-form-field class="prof" appearance="fill">
+        <mat-label>Prof</mat-label>
+        <input type="text" name="prof" placeholder="Tan Eng Chye" [(ngModel)]="prof" matInput required>
+    </mat-form-field>
+
+    <mat-form-field class="acad-year" appearance="fill">
+        <mat-label>AcadYear</mat-label>
+        <mat-select [(ngModel)]="acadYear">
+            <mat-option value="2019-2020">19 - 20</mat-option>
+            <mat-option value="2018-2019">18 - 19</mat-option>
+            <mat-option value="2017-2018">17 - 18</mat-option>
+        </mat-select>
+    </mat-form-field>
+    
+</div>

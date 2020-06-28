@@ -1,0 +1,63 @@
+<main>
+    <div class="left-panel">
+        <div class="mat-display-1">{{module.moduleCode}} - {{module.title}}
+            <button mat-icon-button (click)="addToMyModules()" matTooltip="add to my modules">
+                <mat-icon>add_box</mat-icon>
+            </button>
+        </div>
+        <mat-divider></mat-divider>
+
+        <div class="flex-container">
+            <button mat-button (click)="loadReviewList()" [ngClass]="{'navigation-btn': 'true', 'active-btn': isReviewsActive()}">Reviews</button>
+            <button mat-button (click)="loadQuestionList()" [ngClass]="{'navigation-btn': 'true', 'active-btn': isQuestionsActive()}">Questions</button>
+            <button mat-button (click)="loadDescription()" [ngClass]="{'navigation-btn': 'true', 'active-btn': isDescriptionActive()}">Description</button>
+        </div>
+        <mat-divider></mat-divider>
+        <router-outlet></router-outlet>
+    </div>
+    <div class="right-panel">
+        <mat-card>
+            <mat-card-title>
+                Average Ratings:
+            </mat-card-title>
+
+            <mat-divider></mat-divider>
+
+            <mat-card-content>
+                <div class="flex-container">
+                    <div class="average-rating" matTooltip="10 for most satisfied">
+                        general: {{averageRatings.averageGeneral}} / 10
+                    </div>
+                    <div class="average-rating" matTooltip="10 for most difficult">
+                        difficulty: {{averageRatings.averageDifficulty}} / 10
+                    </div>
+                </div>
+                <div class="flex-container">
+                    <div class="average-rating" matTooltip="10 for heaviest workload">
+                        workload: {{averageRatings.averageWorkload}} / 10
+                    </div>
+                    <div class="average-rating" matTooltip="10 for most willing to recommend">
+                        recommend: {{averageRatings.averageRecommend}} / 10
+                    </div>
+                </div>
+            </mat-card-content>
+        </mat-card>
+
+        <mat-card>
+            <mat-card-title>
+                To see more:
+            </mat-card-title>
+            <mat-divider></mat-divider>
+            <mat-card-content class="more-module-list-container">
+                <div *ngFor="let module of moreModuleList">
+                    <mat-option class="more-module-option" (click)="goModule(module.moduleCode)" [matTooltip]="module.title">
+                        <div class="module-title">{{module.moduleCode}} - {{module.title}}</div>
+                        <div class="module-info">
+                            {{module.faculty}} - {{module.department}} - {{module.moduleCredit}} MCs
+                        </div>
+                    </mat-option>
+                </div>
+            </mat-card-content>
+        </mat-card>
+    </div>
+</main>
