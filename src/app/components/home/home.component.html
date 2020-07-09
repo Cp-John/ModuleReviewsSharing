@@ -1,16 +1,14 @@
 <div>
-    <div class="headline mat-display-3">NUSMods</div>
+    <div class="headline mat-display-1">ModuleReviewsSharing@NUS</div>
     <div class="mat-caption">reviews | ratings | recommend</div>
     <div class="search-box">
         <mat-icon>search</mat-icon>
         <mat-form-field>
-            <input 
-                type="text" 
-                autocomplete="off"
-                matInput 
-                placeholder="Module code or title" 
-                (input)="search(); inputStatusOn()"
-                [(ngModel)]="searchInput">
+            <input type="text" autocomplete="off" matInput placeholder="Module code or title"
+                (input)="search(); inputStatusOn()" [(ngModel)]="searchInput">
+            <button mat-button *ngIf="searchInput" matSuffix mat-icon-button aria-label="Clear" (click)="searchInput=''; search()">
+                <mat-icon>close</mat-icon>
+            </button>
         </mat-form-field>
     </div>
     <div class="scrollable-container" cdkScrollable *ngIf="inputStatus">

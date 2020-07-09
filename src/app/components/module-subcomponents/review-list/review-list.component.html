@@ -20,7 +20,7 @@
         <mat-card-title>
             <span class="user-name">
                 {{userName}}
-                <span class="mat-caption">Under Prof {{review.prof}}, {{review.acadYear}}</span>
+                <span class="mat-caption">Under Prof {{review.moduleInfo.prof}}, {{review.moduleInfo.acadYear}} / {{review.moduleInfo.semester}}</span>
             </span>
         </mat-card-title>
         <mat-card-subtitle>
@@ -32,7 +32,9 @@
 
     <mat-card-content>
         <div class="review">
-            {{review.reviewAndRatings.review}}
+            <pre class="mat-body">
+                {{review.reviewAndRatings.review}}
+            </pre>
         </div>
         <div class="extra-info mat-caption">
             Expected Grade: {{review.extraInfo.gradeExpected}}
@@ -107,15 +109,15 @@
             </div>
         </div>
         <div class="btns">
-            <button mat-icon-button matTooltip="like" (click)="onClickLikePost(review.id)">
+            <button mat-icon-button matTooltip="like" (click)="onClickLikePost(review)">
                 <mat-icon [ngClass]="{'pink-color': ifLike(review.id)}">thumb_up</mat-icon>
                 {{review.numOfLikes}}
             </button>
-            <button mat-icon-button matTooltip="dislike" (click)="onClickDislikePost(review.id)">
+            <button mat-icon-button matTooltip="dislike" (click)="onClickDislikePost(review)">
                 <mat-icon [ngClass]="{'pink-color': ifDislike(review.id)}">thumb_down</mat-icon>
                 {{review.numOfDislikes}}
             </button>
-            <button mat-icon-button matTooltip="share" (click)="onClickSharePost(review.id)">
+            <button mat-icon-button matTooltip="share" (click)="onClickSharePost(review)">
                 <mat-icon>share</mat-icon>
                 {{review.numOfShares}}
             </button>

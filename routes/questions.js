@@ -70,7 +70,6 @@ router.post('/', (req, res) => {
             console.log(err);
             res.send(err);
         }
-        console.log(JSON.stringify(data) + '\n' + 'successfully submitted!');
         res.json(data);
     })
 })

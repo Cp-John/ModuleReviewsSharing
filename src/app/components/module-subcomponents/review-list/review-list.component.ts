@@ -37,7 +37,7 @@ export class ReviewListComponent implements OnInit {
       })
 
       this.postListService.getPostListOfModule(data.moduleCode).subscribe((reviewList: ReviewPost[]) => {
-        this.reviewList = reviewList;
+        this.reviewList = reviewList.reverse();
         this.reviewListShown = this.reviewList.slice(0, 5);
       })
     })
@@ -62,30 +62,58 @@ export class ReviewListComponent implements OnInit {
     this.postListDislike = this.postListService.getPostListDislike();
   }
 
-  onClickLikePost(postId: number) {
+  onClickLikePost(post: ReviewPost) {
+    var postId = post.id;
     if (this.postListDislike.includes(postId)) {
-      this.postListService.cancelDislikePost(postId);
-      this.postListService.likePost(postId);
-      this.updatePostListLikeAndDislike();
+      post.numOfDislikes--;
+      post.numOfLikes++;
+      this.postListService.cancelDislikePost(postId).subscribe((post_1: ReviewPost) => {
+        this.postListService.likePost(postId).subscribe((post_2: ReviewPost) => {
+          this.updatePostListLikeAndDislike();
+          
+        });
+      });
     } else if (!this.postListLike.includes(postId)) {
-      this.postListService.likePost(postId);
-      this.updatePostListLikeAndDislike();
+      post.numOfLikes++;
+      this.postListService.likePost(postId).subscribe((post: ReviewPost) => {
+        this.updatePostListLikeAndDislike();
+      });
+    } else {
+      post.numOfLikes--;
+      this.postListService.cancelLikePost(postId).subscribe((post: ReviewPost) => {
+        this.updatePostListLikeAndDislike();
+      })
     }
   }
 
-  onClickDislikePost(postId: number) {
+  onClickDislikePost(post: ReviewPost) {
+    var postId = post.id;
     if (this.postListLike.includes(postId)) {
-      this.postListService.cancelLikePost(postId);
-      this.postListService.dislikePost(postId);
-      this.updatePostListLikeAndDislike();
+      post.numOfLikes--;
+      post.numOfDislikes++;
+      this.postListService.cancelLikePost(postId).subscribe((post_1: ReviewPost) => {
+        this.postListService.dislikePost(postId).subscribe((post_2: ReviewPost) => {
+          this.updatePostListLikeAndDislike();
+        });
+      });
     } else if (!this.postListDislike.includes(postId)) {
-      this.postListService.dislikePost(postId);
-      this.updatePostListLikeAndDislike();
+      post.numOfDislikes++;
+      this.postListService.dislikePost(postId).subscribe((post_2: ReviewPost) => {
+        this.updatePostListLikeAndDislike();
+      });
+    } else {
+      post.numOfDislikes--;
+      this.postListService.cancelDislikePost(postId).subscribe((post: ReviewPost) => {
+        this.updatePostListLikeAndDislike();
+      })
     }
   }
 
-  onClickSharePost(postId: number) {
-    this.postListService.sharePost(postId);
+  onClickSharePost(post: ReviewPost) {
+    var postId = post.id;
+    post.numOfShares++;
+    this.postListService.sharePost(postId).subscribe((post_1: ReviewPost) => {
+    });
   } 
 
   ifLike(postId: number) {
@@ -95,5 +123,4 @@ export class ReviewListComponent implements OnInit {
   ifDislike(postId: number) {
     return this.postListDislike.includes(postId);
   }
-
 }

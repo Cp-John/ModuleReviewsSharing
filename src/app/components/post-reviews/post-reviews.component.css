@@ -1,0 +1,31 @@
+main {
+    display: flex;
+    width: 70%;
+    margin: 1rem auto;
+}
+
+#post-review {
+    width: 70%;
+    margin-right: 5%;
+}
+
+#data {
+    width: 25%;
+}
+
+#data > mat-card {
+    margin: 1rem auto;
+}
+
+mat-divider {
+    margin: 1rem auto;
+}
+
+#number-of-reviews {
+    margin-top: 2rem;
+}
+
+button {
+    margin: 1rem auto;
+    width: 100%;
+}

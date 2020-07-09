@@ -4,6 +4,7 @@
 
 .prof {
     width: 40%;
+    margin-right: 60%;
 }
 
 .mat-h1 {
@@ -33,4 +34,8 @@ mat-option:hover {
 
 .more-btn {
     width: 100%;
+}
+
+.semester {
+    margin: 0 1rem;
 }

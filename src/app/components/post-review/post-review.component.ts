@@ -39,7 +39,7 @@ export class PostReviewComponent implements OnInit {
   onSubmit() {
     this.ModuleInfo.getModule().subscribe((module: Module) => {
       if (module) {
-        var moduleInfo = new ModuleInfo(module.moduleCode, module.title, this.ModuleInfo.prof, this.ModuleInfo.acadYear);
+        var moduleInfo = new ModuleInfo(module.moduleCode, module.title, this.ModuleInfo.prof, this.ModuleInfo.acadYear, this.ModuleInfo.semester);
         this.postListService.countNumOfPosts().subscribe((numOfPosts: number) => {
           this.reviewPost = new ReviewPost(
             moduleInfo,

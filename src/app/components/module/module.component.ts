@@ -49,6 +49,9 @@ export class ModuleComponent implements OnInit {
 
       this.searchService.getModule(data.moduleCode).subscribe((module: Module) => {
         this.module = module;
+        this.postListService.countPostList(module.moduleCode).subscribe((numOfReviews:number) => {
+          this.module.numOfReviews = numOfReviews;
+        })
       });
 
       this.postListService.getPostListOfModule(data.moduleCode).subscribe((postList: ReviewPost[]) => {

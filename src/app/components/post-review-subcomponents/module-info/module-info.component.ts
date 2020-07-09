@@ -17,6 +17,8 @@ export class ModuleInfoComponent implements OnInit {
 
   public acadYear = '2019-2020';
 
+  public semester = 'Semester 1';
+
   public selectedModule: Module;
 
   public moduleListShown: Module[] = [];

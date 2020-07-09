@@ -5,7 +5,8 @@ var postSchema = mongoose.Schema({
         moduleCode: String,
         title: String,
         prof: String,
-        acadYear: String
+        acadYear: String,
+        semester: String
     },
     reviewAndRatings: {
         review: String,

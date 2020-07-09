@@ -8,7 +8,7 @@ import { ReviewAndRatings } from 'src/app/reviewAndRatings';
 })
 export class ReviewAndRatingsComponent implements OnInit {
 
-  public reviewAndRatings: ReviewAndRatings = new ReviewAndRatings('', 5, 5, 5, 5);
+  public reviewAndRatings: ReviewAndRatings = new ReviewAndRatings('\nWorkload and Difficulty:\nProf and Teaching method:\nOther complaints and commendations:\n', 5, 5, 5, 5);
 
   constructor() { }
 

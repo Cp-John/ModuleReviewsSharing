@@ -24,10 +24,10 @@ export class LatestPostsComponent implements OnInit {
 
   ngOnInit(): void {
     this.postListService.getPostList().subscribe((postList: ReviewPost[]) => {
-      this.postList = postList;
+      this.postList = postList.reverse();
       this.postListShown = postList.slice(0, 5);
     });
-    
+
     this.updatePostListLikeAndDislike();
   }
 
@@ -66,6 +66,11 @@ export class LatestPostsComponent implements OnInit {
       this.postListService.likePost(postId).subscribe((post: ReviewPost) => {
         this.updatePostListLikeAndDislike();
       });
+    } else {
+      post.numOfLikes--;
+      this.postListService.cancelLikePost(postId).subscribe((post: ReviewPost) => {
+        this.updatePostListLikeAndDislike();
+      })
     }
   }
 
@@ -84,6 +89,11 @@ export class LatestPostsComponent implements OnInit {
       this.postListService.dislikePost(postId).subscribe((post_2: ReviewPost) => {
         this.updatePostListLikeAndDislike();
       });
+    } else {
+      post.numOfDislikes--;
+      this.postListService.cancelDislikePost(postId).subscribe((post: ReviewPost) => {
+        this.updatePostListLikeAndDislike();
+      })
     }
   }
 

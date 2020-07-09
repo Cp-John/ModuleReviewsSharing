@@ -4,7 +4,6 @@ import { RefinementList } from '../refinementList';
 import { map } from "rxjs/operators";
 import { Module } from "../module";
 import { PostListService } from '../services/post-list.service';
-import { ReviewPost } from '../reviewPost';
 
 @Injectable({
   providedIn: 'root'

@@ -15,18 +15,21 @@ export class PostListService {
 
   getPostList() {
     if (this.cachedPostList.length > 0) {
-      return of(this.cachedPostList);
+      return of(JSON.parse(JSON.stringify(this.cachedPostList)));
     } else {
       return this.http.get('/posts').pipe(
         map((postList: ReviewPost[]) => {
-          this.cachedPostList = postList.reverse();
-          return this.cachedPostList;
+          this.cachedPostList = postList;
+          return JSON.parse(JSON.stringify(this.cachedPostList));
         })
       );
     }
   }
 
   likePost(postId: number) {
+    this.getPostList().subscribe((reviewList: ReviewPost[]) => {
+      this.cachedPostList[postId].numOfLikes++;
+    })
     var postListLike = this.getPostListLike();
     postListLike.push(postId);
     localStorage.setItem('postListLike', JSON.stringify(postListLike));
@@ -34,11 +37,17 @@ export class PostListService {
   }
 
   cancelLikePost(postId: number) {
+    this.getPostList().subscribe((reviewList: ReviewPost[]) => {
+      this.cachedPostList[postId].numOfLikes--;
+    })
     localStorage.setItem('postListLike', JSON.stringify(this.getPostListLike().filter((id: number) => id != postId)));
     return this.http.put('/posts/like/cancel/' + postId, null);
   }
 
   dislikePost(postId: number) {
+    this.getPostList().subscribe((reviewList: ReviewPost[]) => {
+      this.cachedPostList[postId].numOfDislikes++;
+    })
     var postListDislike = this.getPostListDislike();
     postListDislike.push(postId);
     localStorage.setItem('postListDislike', JSON.stringify(postListDislike));
@@ -46,11 +55,17 @@ export class PostListService {
   }
 
   cancelDislikePost(postId: number) {
+    this.getPostList().subscribe((reviewList: ReviewPost[]) => {
+      this.cachedPostList[postId].numOfDislikes--;
+    })
     localStorage.setItem('postListDislike', JSON.stringify(this.getPostListDislike().filter((id: number) => id != postId)));
     return this.http.put('/posts/dislike/cancel/' + postId, null);
   }
 
   sharePost(postId: number) {
+    this.getPostList().subscribe((reviewList: ReviewPost[]) => {
+      this.cachedPostList[postId].numOfShares++;
+    })
     return this.http.put('/posts/share/' + postId, null);
   }
 
@@ -74,7 +89,7 @@ export class PostListService {
 
   addPost(post: ReviewPost) {
     this.getPostList().subscribe((postList: ReviewPost[]) => {
-      this.cachedPostList.unshift(post);
+      this.cachedPostList.push(post);
     })
     var httpOptions = { 
       headers: new HttpHeaders({"Content-Type": "application/json"}) 

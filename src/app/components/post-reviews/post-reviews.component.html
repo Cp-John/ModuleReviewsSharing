@@ -1,0 +1,29 @@
+<main>
+    <div id="post-review">
+        <app-review-module-info></app-review-module-info>
+
+        <mat-divider></mat-divider>
+
+
+        <app-review-and-ratings></app-review-and-ratings>
+
+        <mat-divider></mat-divider>
+
+        <app-review-extra-info></app-review-extra-info>
+
+        <mat-divider></mat-divider>
+
+        <button mat-flat-button color="primary" (click)="onnSubmit">Submit</button>
+    </div>
+
+    <div id="data">
+        <div>
+            <span class="mat-h3">Data: </span>
+        </div>
+        <mat-card>
+            <div>Number of Modules: </div>
+            <mat-divider></mat-divider>
+            <div id="number-of-reviews">Number of Reviews: </div>
+        </mat-card>
+    </div>
+</main>
