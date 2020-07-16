@@ -48,14 +48,53 @@ mat-card-actions {
 }
 
 .header-image {
-    background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
     background-size: cover;
-  }
+}
   
 .review-container {
     margin: 10px auto;
 }
 
-.pink-color {
-    color: pink;
+.blue-color {
+    color: #4050b5;
 }
+
+.share-box {
+    width: 700px;
+    position: absolute;
+    left: 40%;
+    z-index: 1;
+    text-align: left;
+}
+
+.copy-btn {
+    position: absolute;
+    right: 1rem;
+}
+
+.user-name {
+    width: 80%;
+}
+
+.delete-btn {
+    width: 20%;
+    text-align: right;
+}
+
+mat-card-title {
+    width: 160%;
+}
+
+pre {
+
+    white-space: pre-wrap; /*css-3*/
+    
+    white-space: -moz-pre-wrap; /*Mozilla,since1999*/
+    
+    white-space: -pre-wrap; /*Opera4-6*/
+    
+    white-space: -o-pre-wrap; /*Opera7*/
+    
+    word-wrap: break-word; /*InternetExplorer5.5+*/
+    
+    }

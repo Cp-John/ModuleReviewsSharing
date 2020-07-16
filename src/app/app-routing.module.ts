@@ -9,6 +9,8 @@ import { PostReviewComponent } from './components/post-review/post-review.compon
 import { ModuleDescriptionComponent } from './components/module-subcomponents/module-description/module-description.component';
 import { QuestionListComponent } from './components/module-subcomponents/question-list/question-list.component';
 import { ReviewListComponent } from './components/module-subcomponents/review-list/review-list.component';
+import { AdminAccountLoginComponent } from './components/admin-account-login/admin-account-login.component';
+import { AdminAccountCreateComponent } from './components/admin-account-create/admin-account-create.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -21,6 +23,8 @@ const routes: Routes = [
     {path: 'ReviewList', component: ReviewListComponent},
   ]},
   {path: 'MyModules', component: MyModulesComponent},
+  {path: 'AdminAccountLogin', component: AdminAccountLoginComponent},
+  {path: 'AdminAccountCreate', component: AdminAccountCreateComponent},
   {path: 'Module', redirectTo: 'Module/Description'},
 ];
 

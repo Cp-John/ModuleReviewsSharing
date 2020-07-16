@@ -32,13 +32,12 @@ main {
     margin: 10px;
 }
 
-.header {
-    width: 95%;
-}
+/* .header {
+    width: 90%;
+} */
 
 .view-btn {
-    width: 5%;
-    text-align: right;
+    float: right;
 }
 
 .flex-container {
@@ -63,6 +62,36 @@ main {
     margin: 0 10px;
 }
 
-.pink-color {
-    color: pink;
+.blue-color {
+    color: #4050b5;
+}
+
+.share-box {
+    width: 700px;
+    position: absolute;
+    left: 40%;
+    z-index: 1;
+    text-align: left;
+}
+
+.copy-btn {
+    float: right;
+}
+
+pre {
+
+    white-space: pre-wrap; /*css-3*/
+    
+    white-space: -moz-pre-wrap; /*Mozilla,since1999*/
+    
+    white-space: -pre-wrap; /*Opera4-6*/
+    
+    white-space: -o-pre-wrap; /*Opera7*/
+    
+    word-wrap: break-word; /*InternetExplorer5.5+*/
+    
+    }
+
+.header-image {
+    background-size: cover;
 }

@@ -12,10 +12,14 @@
     margin: 0 auto;
 }
 
-.my-modules {
+.my-modules-and-admin-login {
     width: 57%;
     text-align: right;
     margin-right: 20px;
+}
+
+.my-modules-and-admin-login > button {
+    margin: 0 10px;
 }
 
 tool-bar {

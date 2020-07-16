@@ -45,7 +45,32 @@ router.get('/:moduleCode/count', (req, res) => {
 
 router.post('/', (req, res) => {
     var post = req.body;
-    new Post(post).save((err, data) => {
+    new Post({
+        moduleInfo: {
+            moduleCode: post.moduleInfo.moduleCode,
+            title: post.moduleInfo.title,
+            prof: post.moduleInfo.prof,
+            acadYear: post.moduleInfo.acadYear,
+            semester: post.moduleInfo.semester
+        },
+        reviewAndRatings: {
+            review: post.reviewAndRatings.review,
+            general: post.reviewAndRatings.general,
+            difficulty: post.reviewAndRatings.difficulty,
+            workload: post.reviewAndRatings.workload,
+            recommend: post.reviewAndRatings.recommend,
+        },
+        extraInfo: {
+            gradeExpected: post.extraInfo.gradeExpected,
+            gradeObtained: post.extraInfo.gradeObtained
+        },
+        headerImage: post.headerImage,
+        date: post.date,
+        time: post.time,
+        numOfDislikes: post.numOfDislikes,
+        numOfLikes: post.numOfLikes,
+        numOfShares: post.numOfShares,
+    }).save((err, data) => {
         if (err) {
             console.log(err);
             res.send(err);
@@ -54,8 +79,18 @@ router.post('/', (req, res) => {
     })
 })
 
+router.delete('/delete/:postId', (req, res) => {
+    Post.findOneAndDelete({ _id: req.params.postId }, (err, docs) => {
+        if (err) {
+            console.log(err);
+            res.send(err);
+        }
+        res.json(docs);
+    })
+})
+
 router.put('/like/:postId', (req, res) => {
-    Post.findOneAndUpdate({id: req.params.postId}, { $inc: {numOfLikes: 1}}, (err, docs) => {
+    Post.findOneAndUpdate({ _id: req.params.postId }, { $inc: { numOfLikes: 1 } }, (err, docs) => {
         if (err) {
             console.log(err);
             res.send(err);
@@ -65,7 +100,7 @@ router.put('/like/:postId', (req, res) => {
 })
 
 router.put('/like/cancel/:postId', (req, res) => {
-    Post.findOneAndUpdate({id: req.params.postId}, { $inc: {numOfLikes: -1}}, (err, docs) => {
+    Post.findOneAndUpdate({ _id: req.params.postId }, { $inc: { numOfLikes: -1 } }, (err, docs) => {
         if (err) {
             console.log(err);
             res.send(err);
@@ -75,7 +110,7 @@ router.put('/like/cancel/:postId', (req, res) => {
 })
 
 router.put('/dislike/:postId', (req, res) => {
-    Post.findOneAndUpdate({id: req.params.postId}, { $inc: {numOfDislikes: 1}}, (err, docs) => {
+    Post.findOneAndUpdate({ _id: req.params.postId }, { $inc: { numOfDislikes: 1 } }, (err, docs) => {
         if (err) {
             console.log(err);
             res.send(err);
@@ -85,7 +120,7 @@ router.put('/dislike/:postId', (req, res) => {
 })
 
 router.put('/dislike/cancel/:postId', (req, res) => {
-    Post.findOneAndUpdate({id: req.params.postId}, { $inc: {numOfDislikes: -1}}, (err, docs) => {
+    Post.findOneAndUpdate({ _id: req.params.postId }, { $inc: { numOfDislikes: -1 } }, (err, docs) => {
         if (err) {
             console.log(err);
             res.send(err);
@@ -95,7 +130,7 @@ router.put('/dislike/cancel/:postId', (req, res) => {
 })
 
 router.put('/share/:postId', (req, res) => {
-    Post.findOneAndUpdate({id: req.params.postId}, { $inc: {numOfShares: 1}}, (err, docs) => {
+    Post.findOneAndUpdate({ _id: req.params.postId }, { $inc: { numOfShares: 1 } }, (err, docs) => {
         if (err) {
             console.log(err);
             res.send(err);

@@ -1,0 +1,52 @@
+<mat-card class="container" *ngIf="!isSuccessfulLogin">
+    <mat-card-header>
+        <mat-card-title>Login</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        <form>
+            <table cellspacing="0">
+                <tr>
+                    <td>
+                        <mat-form-field class="full-width">
+                            <input matInput placeholder="AccountName" [(ngModel)]="accountName" name="accountName"
+                                (input)="showErrorMessage=false" required>
+                        </mat-form-field>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <mat-form-field class="full-width">
+                            <input matInput placeholder="Password" [(ngModel)]="password"
+                                (input)="showErrorMessage=false" type="password" name="password" required>
+                        </mat-form-field>
+                    </td>
+                </tr>
+            </table>
+            <mat-hint *ngIf="showErrorMessage" style="color: red; margin-left: 12%;">The account name or password is
+                incorrect!</mat-hint>
+        </form>
+        <mat-spinner [style.display]="showSpinner ? 'block' : 'none'"></mat-spinner>
+    </mat-card-content>
+    <mat-card-actions>
+        <button mat-raised-button (click)="login()" color="primary">Login</button>
+    </mat-card-actions>
+</mat-card>
+
+<mat-card class="container" *ngIf="isSuccessfulLogin">
+    <mat-card-header>
+        <mat-card-title>Welcome, {{accountName}}!</mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content>
+        <pre class="mat-body">
+        <strong>What an admin stuff can do:</strong>
+
+                1.Delete a review post, a question, and an answer;
+                2.<a (click)="goAdminAccountCreate()" routerLink="/AdminAccountCreate">Create another admin account</a>;
+            </pre>
+    </mat-card-content>
+
+    <mat-card-actions>
+        <button mat-raised-button (click)="logout()" color="primary">Logout</button>
+    </mat-card-actions>
+</mat-card>

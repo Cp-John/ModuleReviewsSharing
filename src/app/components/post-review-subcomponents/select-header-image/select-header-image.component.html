@@ -1,0 +1,8 @@
+<div>
+    <div class="mat-h1">Header Image:</div>
+    <ul>
+        <li *ngFor="let pictureUrl of pictureUrlList">
+            <img [src]="pictureUrl" alt="header image" (click)="selectImage(pictureUrl)" [ngClass]="{'selected-header-image':selectedHeaderImage==pictureUrl}">
+        </li>
+    </ul>
+</div>

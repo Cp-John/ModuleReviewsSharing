@@ -17,6 +17,7 @@ export class PostReviewComponent implements OnInit {
   @ViewChild('ModuleInfo') ModuleInfo: any;
   @ViewChild('ExtraInfo') ExtraInfo: any;
   @ViewChild('ReviewAndRatings') ReviewAndRatings: any;
+  @ViewChild('HeaderImage') HeaderImage: any;
 
   public reviewPost: ReviewPost;
 
@@ -40,15 +41,15 @@ export class PostReviewComponent implements OnInit {
     this.ModuleInfo.getModule().subscribe((module: Module) => {
       if (module) {
         var moduleInfo = new ModuleInfo(module.moduleCode, module.title, this.ModuleInfo.prof, this.ModuleInfo.acadYear, this.ModuleInfo.semester);
-        this.postListService.countNumOfPosts().subscribe((numOfPosts: number) => {
-          this.reviewPost = new ReviewPost(
-            moduleInfo,
-            this.ReviewAndRatings.reviewAndRatings,
-            this.ExtraInfo.extraInfo,
-            new Date().toLocaleDateString(),
-            new Date().toTimeString().slice(0, 8),
-            numOfPosts
-          );
+        this.reviewPost = new ReviewPost(
+          moduleInfo,
+          this.ReviewAndRatings.reviewAndRatings,
+          this.ExtraInfo.extraInfo,
+          this.HeaderImage.selectedHeaderImage,
+          new Date().toLocaleDateString(),
+          new Date().toTimeString().slice(0, 8),
+        );
+        this.postListService.getPostList().subscribe((postList: ReviewPost[]) => {
           this.postListService.addPost(this.reviewPost).subscribe((post: ReviewPost) => {
             this.route.navigate(['/LatestPosts']);
           });

@@ -32,5 +32,8 @@ export class HeaderComponent implements OnInit {
   goMyModules() {
     this.route.navigate(['/MyModules']);
   }
-
+  
+  goAdminAccountLogin() {
+    this.route.navigate(['/AdminAccountLogin']);
+  }
 }

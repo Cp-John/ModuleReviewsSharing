@@ -19,12 +19,9 @@ var postSchema = mongoose.Schema({
         gradeExpected: String,
         gradeObtained: String
     },
+    headerImage: String,
     date: String,
     time: String,
-    id: {
-        type: Number,
-        unique: true
-    },
     numOfLikes: Number,
     numOfDislikes: Number,
     numOfShares: Number,

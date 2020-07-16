@@ -41,11 +41,12 @@
                 </mat-form-field>
 
                 <button mat-icon-button (click)="reverseFilteredModuleList()">
-                    <mat-icon matTooltip="reverse">refresh</mat-icon>
+                    <mat-icon matTooltip="reverse" class="icon-btn">refresh</mat-icon>
                 </button>
             </div>
         </div>
         <mat-card class="module-list">
+            <mat-spinner [style.display]="showSpinner ? 'block' : 'none'"></mat-spinner>
             <div *ngFor="let module of moduleListShown; let key=index" class="flex-container">
                 <button mat-button class="module-btn" (click)="goModule(module.moduleCode)">
                     <mat-icon>search</mat-icon>
@@ -55,10 +56,10 @@
                     </span>
                 </button>
                 <div class="review-action flex-container">
-                    <span class="number-of-reviews">{{module.numOfReviews}}</span>
+                    <span class="number-of-reviews" matTooltip="number of reviews">{{module.numOfReviews}}</span>
                     <button mat-icon-button class="add-btn" (click)="goPostReviews(module.moduleCode)"
                         matTooltip="add reviews">
-                        <mat-icon>add_circle</mat-icon>
+                        <mat-icon class="icon-btn">add_circle</mat-icon>
                     </button>
                 </div>
             </div>

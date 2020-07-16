@@ -5,15 +5,15 @@ export class Question {
     public date: string;
     public time: string;
     public moduleCode: string;
-    public id: number;
     public answerList: Answer[];
+    public _id: string;
     constructor(content: string, date: string,
-        time: string, moduleCode: string, id: number) { 
+        time: string, moduleCode: string) { 
             this.content = content;
             this.date = date;
             this.time = time;
             this.moduleCode = moduleCode;
-            this.id = id;
             this.answerList = [];
+            this._id = '';
         }
 }

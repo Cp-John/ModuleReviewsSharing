@@ -7,7 +7,7 @@
             <input type="text" autocomplete="off" matInput placeholder="Module code or title"
                 (input)="search(); inputStatusOn()" [(ngModel)]="searchInput">
             <button mat-button *ngIf="searchInput" matSuffix mat-icon-button aria-label="Clear" (click)="searchInput=''; search()">
-                <mat-icon>close</mat-icon>
+                <mat-icon class="icon-btn">close</mat-icon>
             </button>
         </mat-form-field>
     </div>

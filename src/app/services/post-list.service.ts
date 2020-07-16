@@ -3,6 +3,7 @@ import { ReviewPost } from "../reviewPost";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { of } from "rxjs";
 import { map } from "rxjs/operators";
+import { stringify } from 'querystring';
 
 @Injectable({
   providedIn: 'root'
@@ -26,9 +27,9 @@ export class PostListService {
     }
   }
 
-  likePost(postId: number) {
+  likePost(postId: string) {
     this.getPostList().subscribe((reviewList: ReviewPost[]) => {
-      this.cachedPostList[postId].numOfLikes++;
+      this.cachedPostList.filter((reviewPost: ReviewPost) => reviewPost._id == postId)[0].numOfLikes++;
     })
     var postListLike = this.getPostListLike();
     postListLike.push(postId);
@@ -36,17 +37,17 @@ export class PostListService {
     return this.http.put('/posts/like/' + postId, null);
   }
 
-  cancelLikePost(postId: number) {
+  cancelLikePost(postId: string) {
     this.getPostList().subscribe((reviewList: ReviewPost[]) => {
-      this.cachedPostList[postId].numOfLikes--;
+      this.cachedPostList.filter((reviewPost: ReviewPost) => reviewPost._id == postId)[0].numOfLikes--;
     })
-    localStorage.setItem('postListLike', JSON.stringify(this.getPostListLike().filter((id: number) => id != postId)));
+    localStorage.setItem('postListLike', JSON.stringify(this.getPostListLike().filter((id: string) => id != postId)));
     return this.http.put('/posts/like/cancel/' + postId, null);
   }
 
-  dislikePost(postId: number) {
+  dislikePost(postId: string) {
     this.getPostList().subscribe((reviewList: ReviewPost[]) => {
-      this.cachedPostList[postId].numOfDislikes++;
+      this.cachedPostList.filter((reviewPost: ReviewPost) => reviewPost._id == postId)[0].numOfDislikes++;
     })
     var postListDislike = this.getPostListDislike();
     postListDislike.push(postId);
@@ -54,17 +55,17 @@ export class PostListService {
     return this.http.put('/posts/dislike/' + postId, null);
   }
 
-  cancelDislikePost(postId: number) {
+  cancelDislikePost(postId: string) {
     this.getPostList().subscribe((reviewList: ReviewPost[]) => {
-      this.cachedPostList[postId].numOfDislikes--;
+      this.cachedPostList.filter((reviewPost: ReviewPost) => reviewPost._id == postId)[0].numOfDislikes--;
     })
-    localStorage.setItem('postListDislike', JSON.stringify(this.getPostListDislike().filter((id: number) => id != postId)));
+    localStorage.setItem('postListDislike', JSON.stringify(this.getPostListDislike().filter((id: string) => id != postId)));
     return this.http.put('/posts/dislike/cancel/' + postId, null);
   }
 
-  sharePost(postId: number) {
+  sharePost(postId: string) {
     this.getPostList().subscribe((reviewList: ReviewPost[]) => {
-      this.cachedPostList[postId].numOfShares++;
+      this.cachedPostList.filter((reviewPost: ReviewPost) => reviewPost._id == postId)[0].numOfShares++;
     })
     return this.http.put('/posts/share/' + postId, null);
   }
@@ -72,14 +73,14 @@ export class PostListService {
   getPostListLike() {
     if (!localStorage.getItem('postListLike')) {
       localStorage.setItem('postListLike', JSON.stringify([]));
-    } 
+    }
     return JSON.parse(localStorage.getItem('postListLike'));
   }
-  
+
   getPostListDislike() {
     if (!localStorage.getItem('postListDislike')) {
       localStorage.setItem('postListDislike', JSON.stringify([]));
-    } 
+    }
     return JSON.parse(localStorage.getItem('postListDislike'));
   }
 
@@ -87,14 +88,23 @@ export class PostListService {
     return this.http.get('/posts/count');
   }
 
-  addPost(post: ReviewPost) {
-    this.getPostList().subscribe((postList: ReviewPost[]) => {
-      this.cachedPostList.push(post);
+  deletePost(postId: string) {
+    this.cachedPostList = this.cachedPostList.filter((post: ReviewPost) => {
+      return post._id != postId;
     })
-    var httpOptions = { 
-      headers: new HttpHeaders({"Content-Type": "application/json"}) 
+    return this.http.delete('posts/delete/' + postId);
+  }
+
+  addPost(post: ReviewPost) {
+    var httpOptions = {
+      headers: new HttpHeaders({ "Content-Type": "application/json" })
     };
-    return this.http.post('/posts', post, httpOptions);
+    return this.http.post('/posts', post, httpOptions).pipe(
+      map((reviewPost: ReviewPost) => {
+        this.cachedPostList.push(reviewPost);
+        return reviewPost;
+      })
+    );
   }
 
   countPostList(moduleCode: string) {

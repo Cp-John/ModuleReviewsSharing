@@ -5,10 +5,6 @@ var questionSchema = mongoose.Schema({
     date: String,
     time: String,
     moduleCode: String,
-    id: {
-        type: Number,
-        unique: true
-    }
 })
 
 var Question = mongoose.model('question', questionSchema, 'questionList');

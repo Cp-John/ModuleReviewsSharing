@@ -17,6 +17,9 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
+import { MatDialogModule } from "@angular/material/dialog";
+import { ReactiveFormsModule } from "@angular/forms";
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -40,6 +43,9 @@ import { ReviewAndRatingsComponent } from './components/post-review-subcomponent
 import { ModuleDescriptionComponent } from './components/module-subcomponents/module-description/module-description.component';
 import { QuestionListComponent } from './components/module-subcomponents/question-list/question-list.component';
 import { ReviewListComponent } from './components/module-subcomponents/review-list/review-list.component';
+import { AdminAccountLoginComponent } from './components/admin-account-login/admin-account-login.component';
+import { AdminAccountCreateComponent } from './components/admin-account-create/admin-account-create.component';
+import { SelectHeaderImageComponent } from './components/post-review-subcomponents/select-header-image/select-header-image.component';
 
 @NgModule({
   declarations: [
@@ -62,6 +68,9 @@ import { ReviewListComponent } from './components/module-subcomponents/review-li
     ModuleDescriptionComponent,
     QuestionListComponent,
     ReviewListComponent,
+    AdminAccountLoginComponent,
+    AdminAccountCreateComponent,
+    SelectHeaderImageComponent,
   ],
   imports: [
     BrowserModule,
@@ -83,7 +92,10 @@ import { ReviewListComponent } from './components/module-subcomponents/review-li
     MatPaginatorModule,
     MatExpansionModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    MatProgressSpinnerModule,
+    MatDialogModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

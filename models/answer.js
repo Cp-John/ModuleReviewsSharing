@@ -5,7 +5,7 @@ var answerSchema = mongoose.Schema({
     date: String,
     time: String,
     questionId: {
-        type: Number,
+        type: mongoose.Types.ObjectId,
         index: true
     }
 })

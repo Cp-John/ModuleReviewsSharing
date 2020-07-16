@@ -7,6 +7,7 @@ const modules = require('./routes/modules.js');
 const posts = require('./routes/posts.js');
 const answers = require('./routes/answers.js');
 const questions = require('./routes/questions.js');
+const adminAccounts = require('./routes/adminAccounts.js');
 
 var app = express();
 
@@ -19,6 +20,7 @@ app.use('/modules', modules);
 app.use('/posts', posts);
 app.use('/answers', answers);
 app.use('/questions', questions);
+app.use('/adminAccounts', adminAccounts);
 
 app.get('/Module', (req, res) => {
     res.sendFile(__dirname + '/dist/nusmods/index.html');
@@ -30,6 +32,12 @@ app.get('/Module/QuestionList', (req, res) => {
     res.sendFile(__dirname + '/dist/nusmods/index.html');
 })
 app.get('/Module/ReviewList', (req, res) => {
+    res.sendFile(__dirname + '/dist/nusmods/index.html');
+})
+app.get('/AdminAccountLogin', (req, res) => {
+    res.sendFile(__dirname + '/dist/nusmods/index.html');
+})
+app.get('/AdminAccountCreate', (req, res) => {
     res.sendFile(__dirname + '/dist/nusmods/index.html');
 })
 

@@ -4,7 +4,7 @@
     </div>
     <div class="add-questions-btn">
         <button mat-icon-button (click)="showQuestionForm()" matTooltip="ask a question">
-            <mat-icon>add_circle</mat-icon>
+            <mat-icon class="icon-btn">add_circle</mat-icon>
         </button>
     </div>
 </div>
@@ -28,9 +28,16 @@
 </mat-card>
 
 <mat-card class="question-container" *ngFor="let question of questionListShown; let key=index">
-    <mat-card-title>
-        <mat-icon>question_answer</mat-icon>
-        {{question.content}}
+    <mat-card-title class="flex-container">
+        <div class="header">
+            <mat-icon>question_answer</mat-icon>
+            {{question.content}}
+        </div>
+        <div class="delete-btn">
+            <button mat-icon-button matTooltip="delete" (click)="deleteQuestion(question._id)" *ngIf="isSuccessfulLogin">
+                <mat-icon class="icon-btn">delete</mat-icon>
+            </button>
+        </div>
     </mat-card-title>
 
     <mat-card-subtitle>
@@ -47,7 +54,16 @@
 
         <ol>
             <li class="answer-container" *ngFor="let answer of question.answerList">
-                {{answer.content}}
+                <div class="flex-container">
+                    <div class="header">
+                        {{answer.content}}
+                    </div>
+                    <div class="delete-btn">
+                        <button mat-icon-button matTooltip="delete" (click)="deleteAnswer(question, answer._id)" *ngIf="isSuccessfulLogin">
+                            <mat-icon class="icon-btn">delete</mat-icon>
+                        </button>
+                    </div>
+                </div>
                 <div class="answer-caption mat-caption">
                     {{answer.date}} - {{answer.time}} by {{userName}}
                 </div>

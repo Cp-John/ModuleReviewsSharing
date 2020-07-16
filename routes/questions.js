@@ -1,5 +1,7 @@
 const express = require('express');
 const Question = require('../models/question');
+const mongoose = require('../models/db');
+const Answer = require('../models/answer');
 
 var router = express.Router();
 
@@ -28,7 +30,7 @@ router.get('/:moduleCode', (req, res) => {
         {
             $lookup: {
                 from: 'answerList',
-                localField: 'id',
+                localField: '_id',
                 foreignField: 'questionId',
                 as: 'answerList'
             }
@@ -71,6 +73,22 @@ router.post('/', (req, res) => {
             res.send(err);
         }
         res.json(data);
+    })
+})
+
+router.delete('/delete/:questionId', (req, res) => {
+    Answer.deleteMany({ questionId: req.params.questionId }, (err) => {
+        if (err) {
+            console.log(err);
+            res.json(err);
+        }
+        Question.findOneAndDelete({ _id: req.params.questionId }, (err, docs) => {
+            if (err) {
+                console.log(err);
+                res.json(err);
+            }
+            res.json(docs);
+        })
     })
 })
 

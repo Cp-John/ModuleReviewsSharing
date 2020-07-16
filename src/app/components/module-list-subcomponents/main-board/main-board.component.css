@@ -99,3 +99,7 @@
   width: 150px;
   margin: 0 10px;
 }
+
+mat-spinner {
+  margin: 0 auto;
+}

@@ -1,5 +1,6 @@
 const express = require('express');
 const Answer = require('../models/answer');
+const mongoose = require('../models/db');
 
 var router = express.Router();
 
@@ -25,12 +26,28 @@ router.get('/:questionId', (req, res) => {
 
 router.post('/', (req, res) => {
     var answer = req.body;
-    new Answer(answer).save((err, data) => {
+    var newAns = new Answer({
+        content: answer.content,
+        date: answer.date,
+        time: answer.time,
+        questionId: mongoose.Types.ObjectId(answer.questionId)
+    });
+    newAns.save((err, data) => {
         if (err) {
             console.log(err);
             res.send(err);
         }
         res.json(data);
+    })
+})
+
+router.delete('/delete/:_id', (req, res) => {
+    Answer.findOneAndDelete({ _id: req.params._id }, (err, docs) => {
+        if (err) {
+            console.log(err);
+            res.json(err);
+        }
+        res.json(docs);
     })
 })
 

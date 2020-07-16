@@ -5,23 +5,31 @@
             No reviews yet!
             <mat-icon>sentiment_very_dissatisfied</mat-icon>
         </mat-card>
-        <mat-card *ngFor="let post of postListShown">
-
-            <mat-card-title class="flex-container">
-                <div class="header">
-                    {{post.moduleInfo.moduleCode}} - {{post.moduleInfo.title}}
-                    <span class="mat-caption">Under Prof {{post.moduleInfo.prof}}, {{post.moduleInfo.acadYear}} / {{post.moduleInfo.semester}}</span>
+        <mat-card *ngFor="let post of postListShown; let key=index">
+            <mat-card-header class="flex-container">
+                <div mat-card-avatar class="header-image" [style.background-image]="'url(' + post.headerImage + ')'">
                 </div>
+                <mat-card-title class="flex-container">
+                    <span class="header">
+                        {{post.moduleInfo.moduleCode}} - {{post.moduleInfo.title}}
+                        <span class="mat-caption">Under Prof {{post.moduleInfo.prof}}, {{post.moduleInfo.acadYear}} /
+                            {{post.moduleInfo.semester}}
+                        </span>
+                    </span>
+                </mat-card-title>
                 <div class="view-btn">
                     <button mat-icon-button matTooltip="view" (click)="goModule(post.moduleInfo.moduleCode)">
-                        <mat-icon>search</mat-icon>
+                        <mat-icon class="icon-btn">search</mat-icon>
+                    </button>
+
+                    <button mat-icon-button matTooltip="delete" (click)="delete(post._id)" *ngIf="isSuccessfulLogin">
+                        <mat-icon class="icon-btn">delete</mat-icon>
                     </button>
                 </div>
-            </mat-card-title>
-
-            <mat-card-subtitle>
-                {{post.date}} - {{post.time}} by {{userName}}
-            </mat-card-subtitle>
+                <mat-card-subtitle>
+                    {{post.date}} - {{post.time}} by {{userName}}
+                </mat-card-subtitle>
+            </mat-card-header>
 
             <mat-divider></mat-divider>
 
@@ -106,17 +114,39 @@
                 </div>
                 <div class="btns">
                     <button mat-icon-button matTooltip="like" (click)="onClickLikePost(post)">
-                        <mat-icon [ngClass]="{'pink-color': ifLike(post.id)}">thumb_up</mat-icon>
+                        <mat-icon class="icon-btn" [ngClass]="{'blue-color': ifLike(post._id)}">thumb_up</mat-icon>
                         {{post.numOfLikes}}
                     </button>
                     <button mat-icon-button matTooltip="dislike" (click)="onClickDislikePost(post)">
-                        <mat-icon [ngClass]="{'pink-color': ifDislike(post.id)}">thumb_down</mat-icon>
+                        <mat-icon class="icon-btn" [ngClass]="{'blue-color': ifDislike(post._id)}">thumb_down</mat-icon>
                         {{post.numOfDislikes}}
                     </button>
-                    <button mat-icon-button matTooltip="share" (click)="onClickSharePost(post)">
-                        <mat-icon>share</mat-icon>
+                    <button mat-icon-button matTooltip="share" (mouseover)="hoverOnShareBtn[key] = true"
+                        (mouseleave)="mouseLeaveShareBtn(key)">
+                        <mat-icon class="icon-btn">share</mat-icon>
                         {{post.numOfShares}}
                     </button>
+                    <mat-card class="share-box" *ngIf="hoverOnShareBtn[key]||hoverOnShareBox[key]"
+                        (mouseover)="hoverOnShareBox[key]=true" (mouseleave)="hoverOnShareBox[key]=false">
+                        <mat-card-title>
+                            Copy & Share
+                            <button mat-icon-button (click)="onCopyPost(post, copyContent.innerHTML)" class="copy-btn"
+                                matTooltip="copy review post">
+                                <mat-icon class="icon-btn">
+                                    content_copy
+                                </mat-icon>
+                            </button>
+                        </mat-card-title>
+                        <mat-card-content>
+                            <pre class="mat-body" #copyContent>
+{{post.moduleInfo.moduleCode}} - {{post.moduleInfo.title}} taken by {{userName}}
+under {{post.moduleInfo.prof}}, {{post.moduleInfo.acadYear}} / {{post.moduleInfo.semester}}:
+{{post.reviewAndRatings.review}}
+general: {{post.reviewAndRatings.general}} / 10 (10 for most satisfied)         difficulty: {{post.reviewAndRatings.difficulty}} / 10 (10 for most difficult)
+workload: {{post.reviewAndRatings.workload}} / 10 (10 for heaviest workload)    recommend: {{post.reviewAndRatings.recommend}} / 10 (10 for most willing to recommend)
+                        </pre>
+                        </mat-card-content>
+                    </mat-card>
                 </div>
             </mat-card-actions>
         </mat-card>

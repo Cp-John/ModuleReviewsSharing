@@ -63,3 +63,12 @@ mat-card-subtitle {
 .answer-caption {
     text-align: right;
 }
+
+.header {
+    width: 80%;
+}
+
+.delete-btn {
+    width: 20%;
+    text-align: right;
+}

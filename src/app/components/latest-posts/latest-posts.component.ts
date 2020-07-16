@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { PostListService } from '../../services/post-list.service';
 import { ReviewPost } from 'src/app/reviewPost';
 import { Router, NavigationExtras } from '@angular/router';
+import { MatSnackBar } from "@angular/material/snack-bar";
+import { AdminAccountService } from 'src/app/services/admin-account.service';
 
 @Component({
   selector: 'app-latest-posts',
@@ -16,19 +18,33 @@ export class LatestPostsComponent implements OnInit {
 
   public userName: string = "Anonymous";
 
-  public postListLike: number[] = [];
+  public postListLike: string[] = [];
 
-  public postListDislike: number[] = [];
+  public postListDislike: string[] = [];
 
-  constructor(public postListService: PostListService, public route: Router) { }
+  public hoverOnShareBtn: boolean[];
+  
+  public hoverOnShareBox: boolean[];
+
+  public isSuccessfulLogin: boolean = false;
+
+  public pageIndex: number = 0;
+
+  constructor(public postListService: PostListService, 
+    public route: Router, 
+    public snackBar: MatSnackBar,
+    public adminAccountService: AdminAccountService) { }
 
   ngOnInit(): void {
+    this.resetHoverOn();
     this.postListService.getPostList().subscribe((postList: ReviewPost[]) => {
       this.postList = postList.reverse();
       this.postListShown = postList.slice(0, 5);
     });
-
     this.updatePostListLikeAndDislike();
+    if (this.adminAccountService.getAdminAccount()) {
+      this.isSuccessfulLogin = true;
+    }
   }
 
   goModule(moduleCode: String) {
@@ -40,9 +56,27 @@ export class LatestPostsComponent implements OnInit {
     this.route.navigate(['/Module/ReviewList'], navigationExtras);
   }
 
+  resetHoverOn() {
+    this.hoverOnShareBtn = [false, false, false, false, false];
+    this.hoverOnShareBox = [false, false, false, false, false];
+  }
+
   updatePostListShown(event: any) {
-    var start = event.pageIndex * 5;
+    this.pageIndex = event.pageIndex;
+    var start = this.pageIndex * 5;
     this.postListShown = this.postList.slice(start, start + 5);
+  }
+
+  delete(postId: string) {
+    this.postListService.getPostList().subscribe((postList: ReviewPost[]) => {
+      this.postListService.deletePost(postId).subscribe((reviewPost: ReviewPost) => {
+        this.postList = this.postList.filter((reviewPost: ReviewPost) => {
+          return reviewPost._id != postId;
+        });
+        var start = this.pageIndex * 5;
+        this.postListShown = this.postList.slice(start, start + 5);
+      })
+    })
   }
 
   updatePostListLikeAndDislike() {
@@ -51,14 +85,13 @@ export class LatestPostsComponent implements OnInit {
   }
 
   onClickLikePost(post: ReviewPost) {
-    var postId = post.id;
+    var postId = post._id;
     if (this.postListDislike.includes(postId)) {
       post.numOfDislikes--;
       post.numOfLikes++;
       this.postListService.cancelDislikePost(postId).subscribe((post_1: ReviewPost) => {
         this.postListService.likePost(postId).subscribe((post_2: ReviewPost) => {
           this.updatePostListLikeAndDislike();
-          
         });
       });
     } else if (!this.postListLike.includes(postId)) {
@@ -75,7 +108,7 @@ export class LatestPostsComponent implements OnInit {
   }
 
   onClickDislikePost(post: ReviewPost) {
-    var postId = post.id;
+    var postId = post._id;
     if (this.postListLike.includes(postId)) {
       post.numOfLikes--;
       post.numOfDislikes++;
@@ -97,19 +130,32 @@ export class LatestPostsComponent implements OnInit {
     }
   }
 
-  onClickSharePost(post: ReviewPost) {
-    var postId = post.id;
+  onCopyPost(post: ReviewPost, copyContent: string) {
     post.numOfShares++;
+    const oInput = document.createElement('textarea');
+    var postId = post._id;
+    oInput.value = copyContent + '\n@ModuleReviewsSharing';
+    document.body.appendChild(oInput);
+    oInput.select();
+    document.execCommand('Copy');
+    oInput.style.display = 'none';
+    this.snackBar.open('Review post copied!', '', {
+      duration: 2000,
+    });
     this.postListService.sharePost(postId).subscribe((post_1: ReviewPost) => {
     });
   } 
 
-  ifLike(postId: number) {
+  ifLike(postId: string) {
     return this.postListLike.includes(postId);
   }
 
-  ifDislike(postId: number) {
+  ifDislike(postId: string) {
     return this.postListDislike.includes(postId);
+  }
+
+  mouseLeaveShareBtn(key: number) {
+    setTimeout(() => this.hoverOnShareBtn[key] = false, 200);
   }
 
 }

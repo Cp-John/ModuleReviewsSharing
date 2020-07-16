@@ -25,4 +25,8 @@ export class QuestionListService {
     }
     return this.http.post('/questions', question, httpOptions);
   }
+
+  deleteQuestion(questionId: string) {
+    return this.http.delete('/questions/delete/' + questionId);
+  }
 }

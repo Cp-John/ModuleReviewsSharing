@@ -29,6 +29,8 @@ export class MainBoardComponent implements OnInit {
 
   public sortOption: string = 'moduleCode';
 
+  public showSpinner: boolean = false;
+
   @Input('searchInput') searchInputFromFather: string;
 
   constructor(public searchService: SearchService,
@@ -39,6 +41,7 @@ export class MainBoardComponent implements OnInit {
     if (this.searchInputFromFather) {
       this.searchInput = this.searchInputFromFather;
     }
+    this.showSpinner = true;
     this.search();
   }
 
@@ -97,6 +100,7 @@ export class MainBoardComponent implements OnInit {
 
   search() {
     this.searchService.search(this.searchInput, this.refinementList).subscribe((searchResult: Module[]) => {
+      this.showSpinner = false;
       this.filteredModuleList = searchResult;
       this.moduleListShown = this.filteredModuleList.slice(0, 15);
       this.filteredModuleList.forEach((module: Module) => {

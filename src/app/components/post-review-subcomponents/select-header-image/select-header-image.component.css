@@ -1,0 +1,26 @@
+.mat-h1 {
+    margin-top: 1.5rem;
+}
+
+ul {
+    list-style: none;
+    display: flex;
+}
+
+ul > li {
+    margin: 10px;
+    width: 20%;
+    text-align: center;
+}
+
+img {
+    width: 80%;
+}
+
+img:hover {
+    border: 5px solid #4050b5;
+}
+
+.selected-header-image {
+    border: 5px solid #4050b5;
+}

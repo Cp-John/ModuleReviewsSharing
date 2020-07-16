@@ -1,0 +1,57 @@
+<mat-card *ngIf="isSuccessfulLogin" class="container">
+    <mat-card-header>
+        <mat-card-title>Register</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        <form>
+            <table cellspacing="0">
+                <tr>
+                    <td>
+                        <mat-form-field class="full-width">
+                            <input matInput placeholder="AccountName" 
+                                [formControl]="accountNameFormControl"
+                                [(ngModel)]="newAdminAccount.accountName" name="accountName"
+                                (input)="showErrorMessage=false" required>
+                            <mat-error *ngIf="accountNameFormControl.hasError('required') || accountNameFormControl.hasError('minLength') || accountNameFormControl.hasError('maxLength')">
+                                Please enter a valid accountName
+                            </mat-error>
+                            <mat-hint>
+                                minLength: 3; maxLength: 20
+                            </mat-hint>
+                        </mat-form-field>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <mat-form-field class="full-width">
+                            <input matInput placeholder="Password" [(ngModel)]="newAdminAccount.password"
+                                [formControl]="passwordFormControl"
+                                (input)="showErrorMessage=false" type="password" name="password" required>
+                            <mat-error *ngIf="passwordFormControl.hasError('required') || passwordFormControl.hasError('minLength') || passwordFormControl.hasError('maxLength')">
+                                Please enter a valid password
+                            </mat-error>
+                            <mat-hint>
+                                minLength: 4; maxLength: 11
+                            </mat-hint>
+                        </mat-form-field>
+                    </td>
+                </tr>
+            </table>
+            <mat-hint *ngIf="showErrorMessage" style="color: red; margin-left: 12%;">The account name already exists!</mat-hint>
+        </form>
+        <mat-spinner [style.display]="showSpinner ? 'block' : 'none'"></mat-spinner>
+    </mat-card-content>
+    <mat-card-actions>
+        <button mat-raised-button color="primary" (click)="register()">Register</button>
+    </mat-card-actions>
+</mat-card>
+
+<mat-card *ngIf="!isSuccessfulLogin" class="container">
+    <mat-card-header>
+        <mat-card-title>Please login first!</mat-card-title>
+    </mat-card-header>
+
+    <mat-card-actions>
+        <button mat-raised-button (click)="goAdminAccountLogin()" color="primary">Login</button>
+    </mat-card-actions>
+</mat-card>

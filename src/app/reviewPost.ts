@@ -6,27 +6,29 @@ export class ReviewPost {
     public moduleInfo: ModuleInfo;
     public reviewAndRatings: ReviewAndRatings;
     public extraInfo: ExtraInfo;
+    public headerImage: string;
     public date: string;
     public time: string;
-    public id: number;
     public numOfLikes: number;
     public numOfDislikes: number;
     public numOfShares: number;
+    public _id: string;
     constructor(
         moduleInfo: ModuleInfo,
         reviewAndRatings: ReviewAndRatings,
         extraInfo: ExtraInfo,
+        headerImage: string,
         date: string,
-        time: string,
-        id: number) { 
+        time: string) { 
             this.moduleInfo = moduleInfo;
             this.reviewAndRatings = reviewAndRatings;
             this.extraInfo = extraInfo;
+            this.headerImage = headerImage;
             this.date = date;
             this.time = time;
-            this.id = id;
             this.numOfDislikes = 0;
             this.numOfLikes = 0;
             this.numOfShares = 0;
+            this._id = '';
         }
 }

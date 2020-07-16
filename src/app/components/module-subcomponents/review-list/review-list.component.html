@@ -4,7 +4,7 @@
     </div>
     <div class="add-reviews-btn">
         <button mat-icon-button (click)="addReviews()" matTooltip="add reviews">
-            <mat-icon>add_circle</mat-icon>
+            <mat-icon class="icon-btn">add_circle</mat-icon>
         </button>
     </div>
 </div>
@@ -14,14 +14,22 @@
         <mat-icon class="no-reviews-icon">sentiment_very_dissatisfied</mat-icon>
     </mat-card-content>
 </mat-card>
-<mat-card *ngFor="let review of reviewListShown" class="review-container">
+<mat-card *ngFor="let review of reviewListShown; let key=index" class="review-container">
     <mat-card-header>
-        <div mat-card-avatar class="header-image"></div>
-        <mat-card-title>
-            <span class="user-name">
+        <div mat-card-avatar class="header-image" [style.background-image]="'url(' + review.headerImage + ')'"></div>
+        <mat-card-title class="flex-container">
+            <div class="user-name">
                 {{userName}}
-                <span class="mat-caption">Under Prof {{review.moduleInfo.prof}}, {{review.moduleInfo.acadYear}} / {{review.moduleInfo.semester}}</span>
-            </span>
+                <span class="mat-caption">Under Prof {{review.moduleInfo.prof}}, {{review.moduleInfo.acadYear}} /
+                    {{review.moduleInfo.semester}}</span>
+            </div>
+
+            <div class="delete-btn">
+                <button *ngIf="isSuccessfulLogin" mat-icon-button matTooltip="delete" style="float: right;"
+                    (click)="delete(review._id)">
+                    <mat-icon class="icon-btn">delete</mat-icon>
+                </button>
+            </div>
         </mat-card-title>
         <mat-card-subtitle>
             {{review.date}} - {{review.time}}
@@ -110,17 +118,39 @@
         </div>
         <div class="btns">
             <button mat-icon-button matTooltip="like" (click)="onClickLikePost(review)">
-                <mat-icon [ngClass]="{'pink-color': ifLike(review.id)}">thumb_up</mat-icon>
+                <mat-icon class="icon-btn" [ngClass]="{'blue-color': ifLike(review._id)}">thumb_up</mat-icon>
                 {{review.numOfLikes}}
             </button>
             <button mat-icon-button matTooltip="dislike" (click)="onClickDislikePost(review)">
-                <mat-icon [ngClass]="{'pink-color': ifDislike(review.id)}">thumb_down</mat-icon>
+                <mat-icon class="icon-btn" [ngClass]="{'blue-color': ifDislike(review._id)}">thumb_down</mat-icon>
                 {{review.numOfDislikes}}
             </button>
-            <button mat-icon-button matTooltip="share" (click)="onClickSharePost(review)">
-                <mat-icon>share</mat-icon>
+            <button mat-icon-button matTooltip="share" (mouseover)="hoverOnShareBtn[key] = true"
+                (mouseleave)="mouseLeaveShareBtn(key)">
+                <mat-icon class="icon-btn">share</mat-icon>
                 {{review.numOfShares}}
             </button>
+            <mat-card class="share-box" *ngIf="hoverOnShareBtn[key]||hoverOnShareBox[key]"
+                (mouseover)="hoverOnShareBox[key]=true" (mouseleave)="hoverOnShareBox[key]=false">
+                <mat-card-title>
+                    Copy & Share
+                    <button mat-icon-button (click)="onCopyPost(review, copyContent.innerHTML)" class="copy-btn"
+                        matTooltip="copy review review">
+                        <mat-icon class="icon-btn">
+                            content_copy
+                        </mat-icon>
+                    </button>
+                </mat-card-title>
+                <mat-card-content>
+                    <pre class="mat-body" #copyContent>
+{{review.moduleInfo.moduleCode}} - {{review.moduleInfo.title}} taken by {{userName}}
+under {{review.moduleInfo.prof}}, {{review.moduleInfo.acadYear}} / {{review.moduleInfo.semester}}:
+{{review.reviewAndRatings.review}}
+general: {{review.reviewAndRatings.general}} / 10 (10 for most satisfied)       difficulty: {{review.reviewAndRatings.difficulty}} / 10 (10 for most difficult)
+workload: {{review.reviewAndRatings.workload}} / 10 (10 for heaviest workload)  recommend: {{review.reviewAndRatings.recommend}} / 10 (10 for most willing to recommend)
+                        </pre>
+                </mat-card-content>
+            </mat-card>
         </div>
     </mat-card-actions>
 
