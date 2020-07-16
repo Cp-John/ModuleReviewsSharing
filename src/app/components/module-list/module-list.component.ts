@@ -48,6 +48,9 @@ export class ModuleListComponent implements OnInit {
     if (more['Department']) {
       this.widthOfDrawer = '70%';
       this.hasBackdrop = true;
+    } else if (more['Faculty']) {
+      this.widthOfDrawer = '45%';
+      this.hasBackdrop = true;
     } else {
       this.widthOfDrawer = '40%';
       this.hasBackdrop = false;
