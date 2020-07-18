@@ -6,7 +6,7 @@ Inspired by the module reviews sharing web application of Peking University (url
 3. anonymouse forum under each module; 
 4. my module list; 
 5. admin account
-more to explore ...
+6. more to explore ...
 
 ## Running the project
 
