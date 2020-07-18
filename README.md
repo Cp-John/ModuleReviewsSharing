@@ -11,4 +11,4 @@ Inspired by the module reviews sharing web application of Peking University (url
 ## Running the project
 
 1. run 'npm run build'(only at the first run and after new modifications)
-2. run 'node server.js' to start the project (Navigate to 'http://localhost:4200/' to load the home page)
+2. run 'node server.js' to start the project (Navigate to 'http://localhost:3000/' to load the home page)
