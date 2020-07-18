@@ -1,6 +1,12 @@
 # ModuleReviewsSharing
 
-Inspired by the module reviews sharing web application of Peking University (url: https://courses.pinzhixiaoyuan.com/), we aim to build a professional module reviews sharing application of NUS with the core features: 1.search (with refinements); 2.review and ratings posting; 3.anonymouse forum under each module; 4.my module list; 5.admin account...
+Inspired by the module reviews sharing web application of Peking University (url: https://courses.pinzhixiaoyuan.com/), we aim to build a professional module reviews sharing application of NUS with the core features: 
+1. search (with refinements); 
+2. review and ratings posting; 
+3. anonymouse forum under each module; 
+4. my module list; 
+5. admin account
+more to explore ...
 
 ## Running the project
 
