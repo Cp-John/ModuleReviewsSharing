@@ -150,7 +150,9 @@ workload: {{post.reviewAndRatings.workload}} / 10 (10 for heaviest workload)    
                 </div>
             </mat-card-actions>
         </mat-card>
-        <mat-paginator [length]="postList.length" pageSize="5" showFirstLastButtons="true" hidePageSize="true"
+        <mat-paginator [length]="postList.length" 
+            pageSize="5" showFirstLastButtons="true" hidePageSize="true"
+            [pageIndex]="pageIndex"
             (page)="updatePostListShown($event)"></mat-paginator>
     </div>
     <div class="right-panel">

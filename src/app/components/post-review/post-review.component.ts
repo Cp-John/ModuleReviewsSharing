@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { PostListService } from '../../services/post-list.service';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute, NavigationExtras } from '@angular/router';
 import { SearchService } from '../../services/search.service';
 import { ReviewPost } from 'src/app/reviewPost';
 import { ModuleInfo } from '../../moduleInfo';
@@ -51,7 +51,12 @@ export class PostReviewComponent implements OnInit {
         );
         this.postListService.getPostList().subscribe((postList: ReviewPost[]) => {
           this.postListService.addPost(this.reviewPost).subscribe((post: ReviewPost) => {
-            this.route.navigate(['/LatestPosts']);
+            var navigationExtras: NavigationExtras = {
+              queryParams: {
+                pageIndex: 0
+              }
+            }
+            this.route.navigate(['/LatestPosts'], navigationExtras);
           });
         })
       } else {

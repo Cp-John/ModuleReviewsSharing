@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, NavigationExtras } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -26,7 +26,12 @@ export class HeaderComponent implements OnInit {
   }
 
   goLatestPosts() {
-    this.route.navigate(['/LatestPosts']);
+    var navigationExtras: NavigationExtras = {
+      queryParams: {
+        pageIndex: 0
+      }
+    }
+    this.route.navigate(['/LatestPosts'], navigationExtras);
   }
 
   goMyModules() {

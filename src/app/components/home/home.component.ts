@@ -63,7 +63,12 @@ export class HomeComponent implements OnInit {
   }
 
   goLatestPosts() {
-    this.route.navigate(['/LatestPosts']);
+    var navigationExtras: NavigationExtras = {
+      queryParams: {
+        pageIndex: 0
+      }
+    }
+    this.route.navigate(['/LatestPosts'], navigationExtras);
   }
 
   inputStatusOn() {

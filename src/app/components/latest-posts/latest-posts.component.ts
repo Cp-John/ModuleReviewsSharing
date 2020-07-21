@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PostListService } from '../../services/post-list.service';
 import { ReviewPost } from 'src/app/reviewPost';
-import { Router, NavigationExtras } from '@angular/router';
+import { ActivatedRoute, Router, NavigationExtras } from '@angular/router';
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { AdminAccountService } from 'src/app/services/admin-account.service';
 
@@ -30,17 +30,23 @@ export class LatestPostsComponent implements OnInit {
 
   public pageIndex: number = 0;
 
+
   constructor(public postListService: PostListService, 
     public route: Router, 
     public snackBar: MatSnackBar,
-    public adminAccountService: AdminAccountService) { }
+    public adminAccountService: AdminAccountService,
+    public activatedRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.resetHoverOn();
-    this.postListService.getPostList().subscribe((postList: ReviewPost[]) => {
-      this.postList = postList.reverse();
-      this.postListShown = postList.slice(0, 5);
-    });
+    this.activatedRoute.queryParams.subscribe((data) => {
+      this.pageIndex = data.pageIndex;
+      var start = this.pageIndex * 5;
+      this.postListService.getPostList().subscribe((postList: ReviewPost[]) => {
+        this.postList = postList.reverse();
+        this.postListShown = postList.slice(start, start + 5);
+      });
+    })
     this.updatePostListLikeAndDislike();
     if (this.adminAccountService.getAdminAccount()) {
       this.isSuccessfulLogin = true;
@@ -62,9 +68,12 @@ export class LatestPostsComponent implements OnInit {
   }
 
   updatePostListShown(event: any) {
-    this.pageIndex = event.pageIndex;
-    var start = this.pageIndex * 5;
-    this.postListShown = this.postList.slice(start, start + 5);
+    var navigationExtras: NavigationExtras = {
+      queryParams: {
+        pageIndex: event.pageIndex
+      }
+    }
+    this.route.navigate(['/LatestPosts'], navigationExtras);
   }
 
   delete(postId: string) {
