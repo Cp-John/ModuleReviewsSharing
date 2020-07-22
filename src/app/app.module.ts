@@ -46,6 +46,7 @@ import { ReviewListComponent } from './components/module-subcomponents/review-li
 import { AdminAccountLoginComponent } from './components/admin-account-login/admin-account-login.component';
 import { AdminAccountCreateComponent } from './components/admin-account-create/admin-account-create.component';
 import { SelectHeaderImageComponent } from './components/post-review-subcomponents/select-header-image/select-header-image.component';
+import { ReportComponent } from './components/report/report.component';
 
 @NgModule({
   declarations: [
@@ -71,6 +72,7 @@ import { SelectHeaderImageComponent } from './components/post-review-subcomponen
     AdminAccountLoginComponent,
     AdminAccountCreateComponent,
     SelectHeaderImageComponent,
+    ReportComponent,
   ],
   imports: [
     BrowserModule,

@@ -11,6 +11,7 @@ import { QuestionListComponent } from './components/module-subcomponents/questio
 import { ReviewListComponent } from './components/module-subcomponents/review-list/review-list.component';
 import { AdminAccountLoginComponent } from './components/admin-account-login/admin-account-login.component';
 import { AdminAccountCreateComponent } from './components/admin-account-create/admin-account-create.component';
+import { ReportComponent } from './components/report/report.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -25,6 +26,7 @@ const routes: Routes = [
   {path: 'MyModules', component: MyModulesComponent},
   {path: 'AdminAccountLogin', component: AdminAccountLoginComponent},
   {path: 'AdminAccountCreate', component: AdminAccountCreateComponent},
+  {path: 'Report', component: ReportComponent},
   {path: 'Module', redirectTo: 'Module/Description'},
 ];
 

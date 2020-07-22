@@ -3,7 +3,7 @@ import { ReviewPost } from "../reviewPost";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { of } from "rxjs";
 import { map } from "rxjs/operators";
-import { stringify } from 'querystring';
+import { Report } from '../report';
 
 @Injectable({
   providedIn: 'root'
@@ -26,6 +26,14 @@ export class PostListService {
       );
     }
   }
+
+  getPostById(postId: string) {
+    return this.getPostList().pipe(
+      map((postList: ReviewPost[]) => {
+        return postList.filter((post: ReviewPost) => post._id == postId)[0];
+      })
+    )
+  } 
 
   likePost(postId: string) {
     this.getPostList().subscribe((reviewList: ReviewPost[]) => {
@@ -101,6 +109,7 @@ export class PostListService {
     };
     return this.http.post('/posts', post, httpOptions).pipe(
       map((reviewPost: ReviewPost) => {
+        reviewPost.reportList = [];
         this.cachedPostList.push(reviewPost);
         return reviewPost;
       })
@@ -113,5 +122,23 @@ export class PostListService {
 
   getPostListOfModule(moduleCode: string) {
     return this.http.get('/posts/' + moduleCode);
+  }
+
+  addReport(report: Report) {
+    this.getPostList().subscribe((postList: ReviewPost[]) => {
+      var post = this.cachedPostList.find((reviewPost: ReviewPost) => reviewPost._id == report.postId);
+      if (post) {
+        post.reportList.push(report);
+      }
+    })
+  }
+
+  deleteReport(postId: string) {
+    this.getPostList().subscribe((postList: ReviewPost[]) => {
+      var post = this.cachedPostList.find((reviewPost: ReviewPost) => reviewPost._id == postId);
+      if (post) {
+        post.reportList = [];
+      }
+    })
   }
 }

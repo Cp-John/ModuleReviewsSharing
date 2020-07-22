@@ -1,0 +1,89 @@
+.main-wrapper {
+    margin: 2rem auto;
+    width: 60%;
+}
+
+.mat-display-1 {
+    margin-bottom: 1rem;
+}
+
+.review {
+    margin: 10px;
+}
+
+.not-found {
+    text-align: center;
+    margin: 2rem auto;
+}
+
+.not-found > mat-icon {
+    margin: 0 10px;
+}
+
+.view-btn {
+    float: right;
+}
+
+.flex-container {
+    display: flex;
+}
+
+.ratings {
+    width: 70%;
+}
+
+.ratings > div {
+    width: 25%;
+    text-align: center;
+}
+
+.btns {
+    width: 30%;
+    text-align: right;
+}
+
+.btns > button {
+    margin: 0 10px;
+}
+
+.blue-color {
+    color: #4050b5;
+}
+
+.share-box {
+    width: 700px;
+    position: absolute;
+    left: 40%;
+    z-index: 1;
+    text-align: left;
+}
+
+.copy-btn {
+    float: right;
+}
+
+pre {
+
+    white-space: pre-wrap; /*css-3*/
+    
+    white-space: -moz-pre-wrap; /*Mozilla,since1999*/
+    
+    white-space: -pre-wrap; /*Opera4-6*/
+    
+    white-space: -o-pre-wrap; /*Opera7*/
+    
+    word-wrap: break-word; /*InternetExplorer5.5+*/
+    
+    }
+
+.header-image {
+    background-size: cover;
+}
+
+.report {
+    width: 100%;
+}
+
+.submit-btn {
+    width: 100%;
+}

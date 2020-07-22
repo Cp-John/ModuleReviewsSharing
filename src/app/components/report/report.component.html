@@ -1,0 +1,156 @@
+<main class="main-wrapper">
+    <div class="mat-display-1">Report</div>
+    <mat-card class="not-found mat-h1" *ngIf="isNotFound">
+        Sorry, the review is not found!
+        <mat-icon>sentiment_very_dissatisfied</mat-icon>
+    </mat-card>
+    <mat-card *ngIf="!isNotFound">
+        <mat-card-header class="flex-container">
+            <div mat-card-avatar class="header-image" [style.background-image]="'url(' + post.headerImage + ')'">
+            </div>
+            <mat-card-title class="flex-container">
+                <span class="header">
+                    {{post.moduleInfo.moduleCode}} - {{post.moduleInfo.title}}
+                    <span class="mat-caption">Under Prof {{post.moduleInfo.prof}}, {{post.moduleInfo.acadYear}} /
+                        {{post.moduleInfo.semester}}
+                    </span>
+                </span>
+            </mat-card-title>
+            <div class="view-btn">
+                <button mat-icon-button matTooltip="view" (click)="goModule(post.moduleInfo.moduleCode)">
+                    <mat-icon class="icon-btn">search</mat-icon>
+                </button>
+            </div>
+            <mat-card-subtitle>
+                {{post.date}} - {{post.time}} by {{userName}}
+            </mat-card-subtitle>
+        </mat-card-header>
+    
+        <mat-divider></mat-divider>
+    
+        <mat-card-content>
+            <div class="review">
+                <pre class="mat-body">
+                    {{post.reviewAndRatings.review}}
+                </pre>
+            </div>
+    
+            <div class="extra-info mat-caption">
+                Expected Grade: {{post.extraInfo.gradeExpected}}
+            </div>
+    
+            <div class="extra-info mat-caption">
+                Grade Obtained: {{post.extraInfo.gradeObtained}}
+            </div>
+        </mat-card-content>
+    
+        <mat-divider></mat-divider>
+    
+        <mat-card-actions class="flex-container">
+            <div class="flex-container ratings">
+                <div matTooltip="10 for most satisfied">
+                    general: {{post.reviewAndRatings.general}} / 10
+                    <div class="icon">
+                        <mat-icon *ngIf="post.reviewAndRatings.general<3">sentiment_very_dissatisfied
+                        </mat-icon>
+                        <mat-icon *ngIf="post.reviewAndRatings.general>2&&post.reviewAndRatings.general<5">
+                            sentiment_dissatisfied</mat-icon>
+                        <mat-icon *ngIf="post.reviewAndRatings.general>4&&post.reviewAndRatings.general<7">
+                            sentiment_satisfied</mat-icon>
+                        <mat-icon *ngIf="post.reviewAndRatings.general>6&&post.reviewAndRatings.general<9">
+                            sentiment_satisfied_alt</mat-icon>
+                        <mat-icon *ngIf="post.reviewAndRatings.general>8">sentiment_very_satisfied</mat-icon>
+                    </div>
+                </div>
+                <div matTooltip="10 for most difficult">
+                    difficulty: {{post.reviewAndRatings.difficulty}} / 10
+                    <div class="icon">
+                        <mat-icon *ngIf="post.reviewAndRatings.difficulty>8">sentiment_very_dissatisfied
+                        </mat-icon>
+                        <mat-icon *ngIf="post.reviewAndRatings.difficulty>6&&post.reviewAndRatings.difficulty<9">
+                            sentiment_dissatisfied</mat-icon>
+                        <mat-icon *ngIf="post.reviewAndRatings.difficulty>4&&post.reviewAndRatings.difficulty<7">
+                            sentiment_satisfied</mat-icon>
+                        <mat-icon *ngIf="post.reviewAndRatings.difficulty>2&&post.reviewAndRatings.difficulty<5">
+                            sentiment_satisfied_alt</mat-icon>
+                        <mat-icon *ngIf="post.reviewAndRatings.difficulty<3">sentiment_very_satisfied
+                        </mat-icon>
+                    </div>
+                </div>
+                <div matTooltip="10 for heaviest workload">
+                    workload: {{post.reviewAndRatings.workload}} / 10
+                    <div class="icon">
+                        <mat-icon *ngIf="post.reviewAndRatings.workload>8">sentiment_very_dissatisfied
+                        </mat-icon>
+                        <mat-icon *ngIf="post.reviewAndRatings.workload>6&&post.reviewAndRatings.workload<9">
+                            sentiment_dissatisfied</mat-icon>
+                        <mat-icon *ngIf="post.reviewAndRatings.workload>4&&post.reviewAndRatings.workload<7">
+                            sentiment_satisfied</mat-icon>
+                        <mat-icon *ngIf="post.reviewAndRatings.workload>2&&post.reviewAndRatings.workload<5">
+                            sentiment_satisfied_alt</mat-icon>
+                        <mat-icon *ngIf="post.reviewAndRatings.workload<3">sentiment_very_satisfied</mat-icon>
+                    </div>
+                </div>
+                <div matTooltip="10 for most willing to recommend">
+                    recommend: {{post.reviewAndRatings.recommend}} / 10
+                    <div class="icon">
+                        <mat-icon *ngIf="post.reviewAndRatings.recommend<3">sentiment_very_dissatisfied
+                        </mat-icon>
+                        <mat-icon *ngIf="post.reviewAndRatings.recommend>2&&post.reviewAndRatings.recommend<5">
+                            sentiment_dissatisfied</mat-icon>
+                        <mat-icon *ngIf="post.reviewAndRatings.recommend>4&&post.reviewAndRatings.recommend<7">
+                            sentiment_satisfied</mat-icon>
+                        <mat-icon *ngIf="post.reviewAndRatings.recommend>6&&post.reviewAndRatings.recommend<9">
+                            sentiment_satisfied_alt</mat-icon>
+                        <mat-icon *ngIf="post.reviewAndRatings.recommend>8">sentiment_very_satisfied
+                        </mat-icon>
+                    </div>
+                </div>
+            </div>
+            <div class="btns">
+                <button mat-icon-button matTooltip="like" (click)="onClickLikePost(post)">
+                    <mat-icon class="icon-btn" [ngClass]="{'blue-color': ifLike(post._id)}">thumb_up</mat-icon>
+                    {{post.numOfLikes}}
+                </button>
+                <button mat-icon-button matTooltip="dislike" (click)="onClickDislikePost(post)">
+                    <mat-icon class="icon-btn" [ngClass]="{'blue-color': ifDislike(post._id)}">thumb_down</mat-icon>
+                    {{post.numOfDislikes}}
+                </button>
+                <button mat-icon-button matTooltip="share" (mouseover)="hoverOnShareBtn = true"
+                    (mouseleave)="mouseLeaveShareBtn()">
+                    <mat-icon class="icon-btn">share</mat-icon>
+                    {{post.numOfShares}}
+                </button>
+                <mat-card class="share-box" *ngIf="hoverOnShareBtn||hoverOnShareBox"
+                    (mouseover)="hoverOnShareBox=true" (mouseleave)="hoverOnShareBox=false">
+                    <mat-card-title>
+                        Copy & Share
+                        <button mat-icon-button (click)="onCopyPost(post, copyContent.innerHTML)" class="copy-btn"
+                            matTooltip="copy review post">
+                            <mat-icon class="icon-btn">
+                                content_copy
+                            </mat-icon>
+                        </button>
+                    </mat-card-title>
+                    <mat-card-content>
+                        <pre class="mat-body" #copyContent>
+    {{post.moduleInfo.moduleCode}} - {{post.moduleInfo.title}} taken by {{userName}}
+    under {{post.moduleInfo.prof}}, {{post.moduleInfo.acadYear}} / {{post.moduleInfo.semester}}:
+    {{post.reviewAndRatings.review}}
+    general: {{post.reviewAndRatings.general}} / 10 (10 for most satisfied)         difficulty: {{post.reviewAndRatings.difficulty}} / 10 (10 for most difficult)
+    workload: {{post.reviewAndRatings.workload}} / 10 (10 for heaviest workload)    recommend: {{post.reviewAndRatings.recommend}} / 10 (10 for most willing to recommend)
+                    </pre>
+                    </mat-card-content>
+                </mat-card>
+            </div>
+        </mat-card-actions>
+    </mat-card>
+
+    <mat-form-field class="report" appearance="fill" *ngIf="!isNotFound">
+        <textarea name="report" rows="10" 
+            [(ngModel)]="content"
+            matInput placeholder="E.g.The post is irrelevant. / There are certain dirty words. / There are some errors. "></textarea>
+    </mat-form-field>
+
+    <button mat-raised-button (click)="onSubmitReport()" *ngIf="!isNotFound" color="primary" class="submit-btn">Submit</button>
+</main>

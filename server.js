@@ -7,6 +7,7 @@ const modules = require('./routes/modules.js');
 const posts = require('./routes/posts.js');
 const answers = require('./routes/answers.js');
 const questions = require('./routes/questions.js');
+const reports = require('./routes/reports.js');
 const adminAccounts = require('./routes/adminAccounts.js');
 
 var app = express();
@@ -20,6 +21,7 @@ app.use('/modules', modules);
 app.use('/posts', posts);
 app.use('/answers', answers);
 app.use('/questions', questions);
+app.use('/reports', reports);
 app.use('/adminAccounts', adminAccounts);
 
 app.get('/Module', (req, res) => {
@@ -54,6 +56,10 @@ app.get('/PostReview', (req, res) => {
 })
 
 app.get('/MyModules', (req, res) => {
+    res.sendFile(__dirname + '/dist/nusmods/index.html');
+})
+
+app.get('/Report', (req, res) => {
     res.sendFile(__dirname + '/dist/nusmods/index.html');
 })
 

@@ -1,6 +1,7 @@
 import { ModuleInfo } from './moduleInfo';
 import { ReviewAndRatings } from './reviewAndRatings';
 import { ExtraInfo } from './extraInfo';
+import { Report } from './report';
 
 export class ReviewPost {
     public moduleInfo: ModuleInfo;
@@ -13,6 +14,7 @@ export class ReviewPost {
     public numOfDislikes: number;
     public numOfShares: number;
     public _id: string;
+    public reportList: Report[];
     constructor(
         moduleInfo: ModuleInfo,
         reviewAndRatings: ReviewAndRatings,
@@ -30,5 +32,6 @@ export class ReviewPost {
             this.numOfLikes = 0;
             this.numOfShares = 0;
             this._id = '';
+            this.reportList = [];
         }
 }

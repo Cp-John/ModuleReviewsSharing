@@ -22,6 +22,16 @@
                         <mat-icon class="icon-btn">search</mat-icon>
                     </button>
 
+                    <button mat-icon-button matTooltip="report" (click)="goReport(post._id)" *ngIf="post.reportList.length==0">
+                        <mat-icon class="icon-btn">add_alert</mat-icon>
+                    </button>
+
+                    <button mat-icon-button matTooltip="Errors were reported in this post!" *ngIf="post.reportList.length>0">
+                        <mat-icon style="color:red">
+                            priority_high
+                        </mat-icon>
+                    </button>
+
                     <button mat-icon-button matTooltip="delete" (click)="delete(post._id)" *ngIf="isSuccessfulLogin">
                         <mat-icon class="icon-btn">delete</mat-icon>
                     </button>

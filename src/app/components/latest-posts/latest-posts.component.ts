@@ -40,7 +40,9 @@ export class LatestPostsComponent implements OnInit {
   ngOnInit(): void {
     this.resetHoverOn();
     this.activatedRoute.queryParams.subscribe((data) => {
-      this.pageIndex = data.pageIndex;
+      if (data.pageIndex) {
+        this.pageIndex = data.pageIndex;
+      }
       var start = this.pageIndex * 5;
       this.postListService.getPostList().subscribe((postList: ReviewPost[]) => {
         this.postList = postList.reverse();
@@ -60,6 +62,15 @@ export class LatestPostsComponent implements OnInit {
       }
     }
     this.route.navigate(['/Module/ReviewList'], navigationExtras);
+  }
+
+  goReport(postId: string) {
+    var navigationExtras: NavigationExtras = {
+      queryParams: {
+        postId: postId
+      }
+    }
+    this.route.navigate(['/Report'], navigationExtras);
   }
 
   resetHoverOn() {

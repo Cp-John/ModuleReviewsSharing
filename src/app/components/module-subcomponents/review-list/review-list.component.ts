@@ -171,4 +171,13 @@ export class ReviewListComponent implements OnInit {
     setTimeout(() => this.hoverOnShareBtn[key] = false, 200);
   }
 
+  goReport(postId: string) {
+    var navigationExtras: NavigationExtras = {
+      queryParams: {
+        postId: postId
+      }
+    }
+    this.route.navigate(['/Report'], navigationExtras);
+  }
+
 }

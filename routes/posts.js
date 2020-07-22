@@ -4,7 +4,16 @@ const Post = require('../models/post');
 var router = express.Router();
 
 router.get('/', (req, res) => {
-    Post.find({}, (err, docs) => {
+    Post.aggregate([
+        {
+            $lookup: {
+                from: 'reportList',
+                localField: '_id',
+                foreignField: 'postId',
+                as: 'reportList'
+            }
+        },
+    ], (err, docs) => {
         if (err) {
             console.log(err);
             res.send(err);
@@ -24,7 +33,21 @@ router.get('/count', (req, res) => {
 })
 
 router.get('/:moduleCode', (req, res) => {
-    Post.find({ "moduleInfo.moduleCode": req.params.moduleCode }, (err, docs) => {
+    Post.aggregate([
+        {
+            $lookup: {
+                from: 'reportList',
+                localField: '_id',
+                foreignField: 'postId',
+                as: 'reportList'
+            },
+        },
+        {
+            $match: {
+                'moduleInfo.moduleCode': req.params.moduleCode
+            }
+        }
+    ], (err, docs) => {
         if (err) {
             console.log(err);
             res.send(err);

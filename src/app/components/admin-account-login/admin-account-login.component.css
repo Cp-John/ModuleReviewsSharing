@@ -19,3 +19,110 @@ mat-card-actions {
 mat-spinner {
     margin: 0 auto;
 }
+
+.successful-login-container {
+    display: flex;
+}
+
+.successful-login-card {
+    width: 80%;
+    margin: 10rem auto;
+}
+
+.left-panel {
+    width: 35%;
+    height: 725px;
+    border-right: 1px solid whitesmoke;
+}
+
+.right-panel {
+    width: 65%;
+    padding: 1rem 2rem;
+}
+
+.review {
+    margin: 10px;
+}
+
+.no-reports {
+    text-align: center;
+    margin: 2rem auto;
+}
+
+.delete-report-btn-wrapper {
+    text-align: center;
+}
+
+.view-btn {
+    float: right;
+}
+
+.flex-container {
+    display: flex;
+}
+
+.ratings {
+    width: 70%;
+}
+
+.ratings > div {
+    width: 25%;
+    text-align: center;
+}
+
+.btns {
+    width: 30%;
+    text-align: right;
+}
+
+.btns > button {
+    margin: 0 10px;
+}
+
+.blue-color {
+    color: #4050b5;
+}
+
+.share-box {
+    width: 700px;
+    position: absolute;
+    left: 20%;
+    z-index: 1;
+    text-align: left;
+}
+
+.copy-btn {
+    float: right;
+}
+
+pre {
+
+    white-space: pre-wrap; /*css-3*/
+    
+    white-space: -moz-pre-wrap; /*Mozilla,since1999*/
+    
+    white-space: -pre-wrap; /*Opera4-6*/
+    
+    white-space: -o-pre-wrap; /*Opera7*/
+    
+    word-wrap: break-word; /*InternetExplorer5.5+*/
+    
+    }
+
+.header-image {
+    background-size: cover;
+}
+
+.report-content {
+    width: 100%;
+    min-height: 5rem;
+    background-color: whitesmoke;
+    border-radius: 5px;
+    border: solid #8e8e8e 1px;
+    margin-top: 1rem;
+    padding: 5px;
+}
+
+.report-footer {
+    text-align: right;
+}

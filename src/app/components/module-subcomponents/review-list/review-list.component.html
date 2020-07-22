@@ -23,14 +23,24 @@
                 <span class="mat-caption">Under Prof {{review.moduleInfo.prof}}, {{review.moduleInfo.acadYear}} /
                     {{review.moduleInfo.semester}}</span>
             </div>
-
-            <div class="delete-btn">
-                <button *ngIf="isSuccessfulLogin" mat-icon-button matTooltip="delete" style="float: right;"
-                    (click)="delete(review._id)">
-                    <mat-icon class="icon-btn">delete</mat-icon>
-                </button>
-            </div>
         </mat-card-title>
+
+        <div class="header-actions">
+            <button mat-icon-button matTooltip="report" (click)="goReport(review._id)" *ngIf="review.reportList.length==0">
+                <mat-icon class="icon-btn">add_alert</mat-icon>
+            </button>
+
+            <button mat-icon-button matTooltip="Errors were reported in this post!" *ngIf="review.reportList.length>0">
+                <mat-icon style="color:red">
+                    priority_high
+                </mat-icon>
+            </button>
+
+            <button *ngIf="isSuccessfulLogin" mat-icon-button matTooltip="delete"
+                (click)="delete(review._id)">
+                <mat-icon class="icon-btn">delete</mat-icon>
+            </button>
+        </div>
         <mat-card-subtitle>
             {{review.date}} - {{review.time}}
         </mat-card-subtitle>
