@@ -57,7 +57,6 @@ export class AdminAccountLoginComponent implements OnInit {
     this.reportListService.getReportList().subscribe((reportList: Report[]) => {
       this.reportList = reportList;
       this.updateReportShown();
-      console.log(this.report);
     })
   }
 
@@ -84,7 +83,6 @@ export class AdminAccountLoginComponent implements OnInit {
   }
 
   deleteReport(reportId: string) {
-    console.log(this.report);
     this.reportListService.deleteReport(reportId).subscribe((report: Report) => {
       this.reportList = this.reportList.filter((report: Report) => {
         return report._id != reportId;
