@@ -35,6 +35,8 @@ export class ModuleComponent implements OnInit {
 
   public moreModuleList: Module[] = [];
 
+  public myModuleList: Module[] = [];
+
   constructor(public route: Router, 
     public activatedRoute: ActivatedRoute, 
     public searchService: SearchService,
@@ -63,15 +65,35 @@ export class ModuleComponent implements OnInit {
       this.searchService.getMoreModuleList(data.moduleCode).subscribe((moreModuleList: Module[]) => {
         this.moreModuleList = moreModuleList;
       })
+
+      this.updateMyModuleList();
     })
+  }
+
+  updateMyModuleList() {
+    this.myModuleList = this.myModuleService.getMyModuleList();
   }
 
   addToMyModules() {
     this.myModuleService.addModule(this.module);
+    this.updateMyModuleList();
     this.snackBar.open('Successfully added to my modules!', 'Close', {
       verticalPosition: 'top',
-      duration: 1000
+      duration: 2000
     });
+  }
+
+  deleteFromMyModules() {
+    this.myModuleService.deleteModule(this.module.moduleCode);
+    this.updateMyModuleList();
+    this.snackBar.open('Successfully deleted from my modules!', 'Close', {
+      verticalPosition: 'top',
+      duration: 2000
+    });
+  }
+
+  isMyModule(moduleCode: string) {
+    return this.myModuleList.map((module: Module) => module.moduleCode).includes(moduleCode);
   }
 
   addReviews() {

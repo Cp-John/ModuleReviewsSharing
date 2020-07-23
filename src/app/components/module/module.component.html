@@ -1,8 +1,11 @@
 <main>
     <div class="left-panel">
         <div class="mat-display-1">{{module.moduleCode}} - {{module.title}}
-            <button mat-icon-button (click)="addToMyModules()" matTooltip="add to my modules">
-                <mat-icon class="icon-btn">add_box</mat-icon>
+            <button mat-icon-button (click)="addToMyModules()" matTooltip="add to My Modules" *ngIf="!isMyModule(module.moduleCode)">
+                <mat-icon class="icon-btn">star_outline</mat-icon>
+            </button>
+            <button mat-icon-button (click)="deleteFromMyModules()" matTooltip="delete from My Modules" color="primary" *ngIf="isMyModule(module.moduleCode)">
+                <mat-icon class="icon-btn">star</mat-icon>
             </button>
         </div>
         <mat-divider></mat-divider>
