@@ -50,6 +50,7 @@ export class AdminAccountLoginComponent implements OnInit {
     public reportListService: ReportListService) { }
 
   ngOnInit(): void {
+    this.updatePostListLikeAndDislike();
     if (this.adminAccountService.getAdminAccount()) {
       this.isSuccessfulLogin = true;
       this.accountName = this.adminAccountService.getAdminAccount().accountName;
